@@ -1,26 +1,343 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Dark mode colors */
+  --bg: #0b1220;
+  --bg-alt: #0e1630;
+  --text: #eaf2ff;
+  --muted: #a8b4d4;
+  --primary: #34d399;
+  --primary-700: #19966b;
+  --accent: #60a5fa;
+  --danger: #ef4444;
+  --glass: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.12);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+  /* Corporate colors */
+  --corporate-blue: #215096;
+  --corporate-blue-light: #64b2e7;
+  --corporate-red: #E53935;
+  --corporate-white: #ffffff;
+  --corporate-gray-light: #f8fafc;
+  --corporate-gray-medium: #e2e8f0;
+  --corporate-gray-dark: #475569;
+  --corporate-text-dark: #1e293b;
+  --corporate-text-muted: #64748b;
+
+  /* Legacy Tailwind variables for compatibility */
+  --background: 0 0% 100%;
+  --foreground: 210 40% 8%;
+  --primary: 220 60% 35%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 71% 57%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 222.2 84% 4.9%;
+  --radius: 0.5rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Light mode */
+[data-theme="light"] {
+  --bg: var(--corporate-white);
+  --bg-alt: var(--corporate-gray-light);
+  --text: var(--corporate-text-dark);
+  --muted: var(--corporate-text-muted);
+  --primary: var(--corporate-blue);
+  --primary-700: var(--corporate-blue);
+  --accent: var(--corporate-blue-light);
+  --danger: var(--corporate-red);
+  --glass: rgba(33, 80, 150, 0.08);
+  --border: var(--corporate-gray-medium);
+  --shadow: 0 10px 30px rgba(33, 80, 150, 0.15);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  /* Modo oscuro - completamente oscuro */
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --primary: 210 40% 98%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 212.7 26.8% 83.9%;
+}
+
+* {
+  box-sizing: border-box;
+  border-color: hsl(var(--border));
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  background: hsl(var(--background));
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  /* padding-top: 80px; */
+  /* Compensar header fijo */
+  font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--text);
+  background: radial-gradient(1200px 800px at 80% -10%, #19315a, transparent 60%), linear-gradient(180deg, #070b13 0%, #0b1220 100%);
+  overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  /* font-size: 16px !important; */
+}
+
+[data-theme="light"] body {
+  background: linear-gradient(135deg, var(--corporate-gray-light) 0%, var(--corporate-white) 100%);
+}
+
+@layer base {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: hsl(var(--foreground));
+  }
+
+  p {
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* Asegurar que todos los elementos respeten el modo oscuro */
+  div,
+  section,
+  article,
+  aside,
+  nav,
+  header,
+  footer,
+  main {
+    /* background: inherit; */
+    color: inherit;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 rounded-lg font-medium transition-colors duration-200;
+    background-color: var(--corporate-blue);
+    color: var(--corporate-white);
+  }
+
+  .btn-primary:hover {
+    background-color: #1a4080;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 rounded-lg font-medium transition-colors duration-200;
+    background-color: var(--corporate-red);
+    color: var(--corporate-white);
+  }
+
+  .btn-secondary:hover {
+    background-color: #d32f2f;
+  }
+
+  .btn-gradient-primary {
+    @apply px-8 py-4 rounded-lg font-semibold transition-all duration-300 text-center;
+    background: linear-gradient(135deg, var(--corporate-blue) 0%, var(--corporate-blue-light) 100%);
+    color: var(--corporate-white);
+    box-shadow: 0 4px 15px rgba(33, 80, 150, 0.3);
+  }
+
+  .btn-gradient-primary:hover {
+    background: linear-gradient(135deg, #1a4080 0%, #4a9de8 100%);
+    box-shadow: 0 6px 20px rgba(33, 80, 150, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .btn-modern-gradient {
+    @apply px-8 py-4 rounded-xl font-semibold transition-all duration-300 text-center relative overflow-hidden;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    color: white;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-modern-gradient::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn-modern-gradient:hover {
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 50%, #ec4899 100%);
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+    transform: translateY(-3px) scale(1.02);
+  }
+
+  .btn-modern-gradient:hover::before {
+    left: 100%;
+  }
+
+  .btn-modern-gradient:active {
+    transform: translateY(-1px) scale(0.98);
+  }
+
+  /* Gradientes corporativos */
+  .gradient-primary {
+    background: linear-gradient(135deg, var(--corporate-blue-light), var(--corporate-blue));
+  }
+
+  .gradient-primary-hover:hover {
+    background: linear-gradient(135deg, var(--corporate-blue), var(--corporate-blue-light));
+    box-shadow: 0 12px 32px rgba(100, 178, 231, 0.5);
+  }
+
+  .gradient-whatsapp {
+    background: linear-gradient(135deg, #128C7E, #25D366);
+  }
+
+  .gradient-whatsapp-hover:hover {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    box-shadow: 0 12px 32px rgba(37, 211, 102, 0.5);
+  }
+
+  /* Botones con gradientes */
+  .btn-gradient-corporate {
+    @apply text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg;
+    background: linear-gradient(135deg, var(--corporate-blue-light), var(--corporate-blue));
+  }
+
+  .btn-gradient-corporate:hover {
+    background: linear-gradient(135deg, var(--corporate-blue), var(--corporate-blue-light));
+    box-shadow: 0 12px 32px rgba(100, 178, 231, 0.5);
+  }
+
+  .btn-gradient-whatsapp {
+    @apply text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg flex items-center justify-center space-x-2;
+    background: linear-gradient(135deg, #128C7E, #25D366);
+  }
+
+  .btn-gradient-whatsapp:hover {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    box-shadow: 0 12px 32px rgba(37, 211, 102, 0.5);
+  }
+
+  .text-gradient-title {
+    background: linear-gradient(135deg, #ffffff 0%, #64b2e7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .text-gradient-title-dark {
+    background: linear-gradient(135deg, #ffffff 0%, #93c5fd 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  }
+
+  .card {
+    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm;
+  }
+
+  .text-primary {
+    color: var(--corporate-blue);
+  }
+
+  .text-secondary {
+    color: var(--corporate-red);
+  }
+
+  /* Mejorar el modo oscuro para todos los elementos */
+  .dark-mode-fix {
+    @apply bg-gray-900 text-white;
+  }
+
+  /* Header styles */
+  .header {
+    background: rgba(11, 18, 32, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+
+  /* Light mode header styles */
+  [data-theme="light"] .header {
+    background: #ffffff !important;
+    border-bottom: 1px solid var(--corporate-gray-medium);
+    box-shadow: 0 2px 20px rgba(33, 80, 150, 0.1);
+  }
+
+  [data-theme="light"] .brand__logo {
+    color: #1e293b;
+  }
+
+  [data-theme="light"] .brand__ozono-vida {
+    color: var(--corporate-blue);
+  }
+
+  [data-theme="light"] .brand__huaraz {
+    color: #E53E3E;
+  }
+
+  /* Logo hover effect */
+  .header a:hover .brand__logo {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
+
+
+
+
+  .background-corporate-blue {
+    background-color: var(--corporate-blue);
+  }
+
+  .background-corporate-red {
+    background-color: var(--corporate-red);
+  }
+
+  .background-corporate-white {
+    background-color: var(--corporate-white);
+  }
+
+  .background-corporate-gray-light {
+    background-color: var(--corporate-gray-light);
+  }
+
+  .background-corporate-gray-medium {
+    background-color: var(--corporate-gray-medium);
+  }
+
+  .background-corporate-gray-dark {
+    background-color: var(--corporate-gray-dark);
+  }
+
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }
