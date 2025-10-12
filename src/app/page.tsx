@@ -5,10 +5,26 @@ import { Heart, Shield, Zap, Users, Phone, Mail, MapPin, CheckCircle, Star, Cloc
 import Image from 'next/image';
 import companyData from '@/data/company.json';
 import { AppointmentModal } from '@/components/ui/AppointmentModal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [ isAppointmentModalOpen, setIsAppointmentModalOpen ] = useState(false);
+
+  useEffect(() => {
+    // Cargar el script de TikTok embed
+    const script = document.createElement('script');
+    script.src = 'https://www.tiktok.com/embed.js';
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      // Limpiar el script cuando el componente se desmonte
+      const existingScript = document.querySelector('script[src="https://www.tiktok.com/embed.js"]');
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
@@ -162,103 +178,222 @@ export default function Home() {
         </div>
       </section> */}
 
-      {/* Servicios Section */}
-      <section className="py-20 bg-corporate-gray-light dark:bg-gray-800">
-        <div className="container mx-auto px-4 md:px-8 lg:px-4 max-w-7xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-corporate-text-dark dark:text-white mb-4">
-              Nuestros Servicios
+      {/* Servicios Section - Rediseñada */}
+      <section className="py-24 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 relative overflow-hidden">
+        {/* Elementos decorativos de fondo */}
+        <div className="absolute top-0 left-0 w-full h-full opacity-5">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-corporate-blue rounded-full blur-3xl"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-corporate-blue-light rounded-full blur-2xl"></div>
+          <div className="absolute bottom-20 left-1/3 w-40 h-40 bg-corporate-red rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="container mx-auto px-4 md:px-8 lg:px-4 max-w-7xl relative z-10">
+          {/* Header mejorado */}
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center space-x-2 bg-corporate-blue/10 text-corporate-blue px-4 py-2 rounded-full text-sm font-semibold mb-6">
+              <Shield className="w-4 h-4" />
+              <span>Nuestros Servicios</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-corporate-text-dark dark:text-white mb-6 leading-tight">
+              Tratamientos de
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-corporate-blue to-corporate-blue-light"> Excelencia</span>
             </h2>
-            <p className="text-xl md:text-2xl lg:text-3xl text-corporate-text-muted dark:text-gray-300 max-w-2xl mx-auto">
-              Ofrecemos tratamientos innovadores y efectivos para mejorar tu salud y bienestar.
+            <p className="text-xl md:text-2xl text-corporate-text-muted dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Ofrecemos tratamientos innovadores y efectivos para mejorar tu salud y bienestar con tecnología de vanguardia.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Grid de servicios mejorado */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
             {/* Ozonoterapia */}
-            <div className="card p-6 text-center hover:shadow-lg transition-all duration-300 hover:scale-105 dark:bg-gray-800 dark:border-gray-700">
-              <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
+            <div className="group relative bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02] border border-gray-100 dark:border-gray-700 cursor-pointer">
+              {/* Imagen con overlay mejorado */}
+              <div className="relative w-full h-56 overflow-hidden">
                 <Image
                   src="/images/services/servicios-ozonoterapia.png"
                   alt="Ozonoterapia"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+
+                {/* Badge en la esquina */}
+                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
+                  <span className="text-xs font-semibold text-corporate-blue">O₃</span>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-corporate-text-dark dark:text-white mb-2">
-                Ozonoterapia
-              </h3>
-              <p className="text-corporate-text-muted dark:text-gray-300 mb-4">
-                Tratamiento médico con ozono para diversas condiciones de salud.
-              </p>
-              <a href="/servicios/ozonoterapia" className="text-corporate-blue dark:text-blue-400 hover:text-corporate-blue-light font-medium">
-                Ver más →
-              </a>
+
+              {/* Contenido */}
+              <div className="p-8 relative z-10">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-corporate-blue to-corporate-blue-light rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+                    <Zap className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-corporate-text-dark dark:text-white group-hover:text-corporate-blue transition-colors duration-300">
+                    Ozonoterapia
+                  </h3>
+                </div>
+
+                <p className="text-corporate-text-muted dark:text-gray-300 mb-6 leading-relaxed">
+                  Tratamiento médico con ozono para diversas condiciones de salud y regeneración celular.
+                </p>
+
+                <a
+                  href="/servicios/ozonoterapia"
+                  className="inline-flex items-center space-x-2 text-corporate-blue dark:text-blue-400 hover:text-corporate-blue-light font-semibold group-hover:translate-x-1 transition-all duration-300"
+                >
+                  <span>Ver más</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
 
             {/* Plasma Rico en Plaquetas */}
-            <div className="card p-6 text-center hover:shadow-lg transition-all duration-300 hover:scale-105 dark:bg-gray-800 dark:border-gray-700">
-              <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
+            <div className="group relative bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02] border border-gray-100 dark:border-gray-700 cursor-pointer">
+              <div className="relative w-full h-56 overflow-hidden">
                 <Image
                   src="/images/services/servicios-plasmaRicoPlaquetas.png"
                   alt="Plasma Rico en Plaquetas"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+
+                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
+                  <span className="text-xs font-semibold text-corporate-red">PRP</span>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-corporate-text-dark dark:text-white mb-2">
-                Plasma Rico en Plaquetas
-              </h3>
-              <p className="text-corporate-text-muted dark:text-gray-300 mb-4">
-                Tratamiento regenerativo utilizando tu propia sangre.
-              </p>
-              <a href="/servicios/plasma-rico-plaquetas" className="text-corporate-blue dark:text-blue-400 hover:text-corporate-blue-light font-medium">
-                Ver más →
-              </a>
+
+              <div className="p-8 relative z-10">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-corporate-red to-pink-500 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+                    <Heart className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-corporate-text-dark dark:text-white group-hover:text-corporate-red transition-colors duration-300">
+                    Plasma Rico en Plaquetas
+                  </h3>
+                </div>
+
+                <p className="text-corporate-text-muted dark:text-gray-300 mb-6 leading-relaxed">
+                  Tratamiento regenerativo utilizando tu propia sangre para acelerar la curación.
+                </p>
+
+                <a
+                  href="/servicios/plasma-rico-plaquetas"
+                  className="inline-flex items-center space-x-2 text-corporate-blue dark:text-blue-400 hover:text-corporate-blue-light font-semibold group-hover:translate-x-1 transition-all duration-300"
+                >
+                  <span>Ver más</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
 
             {/* Medicina Regenerativa */}
-            <div className="card p-6 text-center hover:shadow-lg transition-all duration-300 hover:scale-105 dark:bg-gray-800 dark:border-gray-700">
-              <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
+            <div className="group relative bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02] border border-gray-100 dark:border-gray-700 cursor-pointer">
+              <div className="relative w-full h-56 overflow-hidden">
                 <Image
                   src="/images/services/servicios-medicinaRegenerativa.png"
                   alt="Medicina Regenerativa"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+
+                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
+                  <span className="text-xs font-semibold text-green-600">MR</span>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-corporate-text-dark dark:text-white mb-2">
-                Medicina Regenerativa
-              </h3>
-              <p className="text-corporate-text-muted dark:text-gray-300 mb-4">
-                Terapias avanzadas para regenerar tejidos y mejorar la función.
-              </p>
-              <a href="/servicios/medicina-regenerativa" className="text-corporate-blue dark:text-blue-400 hover:text-corporate-blue-light font-medium">
-                Ver más →
-              </a>
+
+              <div className="p-8 relative z-10">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+                    <Target className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-corporate-text-dark dark:text-white group-hover:text-green-600 transition-colors duration-300">
+                    Medicina Regenerativa
+                  </h3>
+                </div>
+
+                <p className="text-corporate-text-muted dark:text-gray-300 mb-6 leading-relaxed">
+                  Terapias avanzadas para regenerar tejidos y mejorar la función corporal.
+                </p>
+
+                <a
+                  href="/servicios/medicina-regenerativa"
+                  className="inline-flex items-center space-x-2 text-corporate-blue dark:text-blue-400 hover:text-corporate-blue-light font-semibold group-hover:translate-x-1 transition-all duration-300"
+                >
+                  <span>Ver más</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
 
             {/* Cóctel de Vida */}
-            <div className="card p-6 text-center hover:shadow-lg transition-all duration-300 hover:scale-105 dark:bg-gray-800 dark:border-gray-700">
-              <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
+            <div className="group relative bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02] border border-gray-100 dark:border-gray-700 cursor-pointer">
+              <div className="relative w-full h-56 overflow-hidden">
                 <Image
                   src="/images/services/servicios-coctelVida.png"
                   alt="Cóctel de Vida"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+
+                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
+                  <span className="text-xs font-semibold text-purple-600">CV</span>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-corporate-text-dark dark:text-white mb-2">
-                Cóctel de Vida
-              </h3>
-              <p className="text-corporate-text-muted dark:text-gray-300 mb-4">
-                Terapia combinada para rejuvenecimiento y vitalidad.
-              </p>
-              <a href="/servicios/coctel-vida" className="text-corporate-blue dark:text-blue-400 hover:text-corporate-blue-light font-medium">
-                Ver más →
-              </a>
+
+              <div className="p-8 relative z-10">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+                    <Zap className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-corporate-text-dark dark:text-white group-hover:text-purple-600 transition-colors duration-300">
+                    Cóctel de Vida
+                  </h3>
+                </div>
+
+                <p className="text-corporate-text-muted dark:text-gray-300 mb-6 leading-relaxed">
+                  Terapia combinada para rejuvenecimiento y vitalidad completa del organismo.
+                </p>
+
+                <a
+                  href="/servicios/coctel-vida"
+                  className="inline-flex items-center space-x-2 text-corporate-blue dark:text-blue-400 hover:text-corporate-blue-light font-semibold group-hover:translate-x-1 transition-all duration-300"
+                >
+                  <span>Ver más</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
           </div>
+
+          {/* CTA Section mejorado */}
+          {/* <div className="mt-20 text-center">
+            <div className="bg-gradient-to-r from-corporate-blue/10 to-corporate-blue-light/10 rounded-3xl p-8 lg:p-12 border border-corporate-blue/20">
+              <h3 className="text-2xl md:text-3xl font-bold text-corporate-text-dark dark:text-white mb-4">
+                ¿No estás seguro cuál es el tratamiento ideal para ti?
+              </h3>
+              <p className="text-lg text-corporate-text-muted dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+                Nuestro equipo médico te ayudará a elegir la mejor opción según tu condición específica.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button
+                  onClick={() => setIsAppointmentModalOpen(true)}
+                  className="btn-gradient-corporate px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
+                  Consulta Gratuita
+                </button>
+                <a
+                  href="/servicios"
+                  className="bg-white dark:bg-gray-800 text-corporate-blue border-2 border-corporate-blue px-8 py-4 text-lg font-semibold rounded-xl hover:bg-corporate-blue hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg"
+                >
+                  Ver Todos los Servicios
+                </a>
+              </div>
+            </div>
+          </div> */}
         </div>
       </section>
 
@@ -274,121 +409,144 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {/* Video 1 */}
-            <a
-              href="https://www.tiktok.com/@ozonovidahuaraz"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-              aria-label="Ver video de testimonio en TikTok"
-            >
-              <div className="aspect-[9/16] bg-gradient-to-br from-corporate-blue to-corporate-blue-light relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-white/30 transition-colors">
-                      <Play className="w-8 h-8 ml-1" />
-                    </div>
-                    <h3 className="font-bold text-lg mb-2">Testimonio Real</h3>
-                    <p className="text-sm opacity-90">Paciente recuperado</p>
-                  </div>
-                </div>
-                {/* Overlay de TikTok */}
-                <div className="absolute top-3 right-3">
-                  <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
-                    <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
-                    </svg>
-                  </div>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {/* Video 1 - Ubicación del Centro Médico */}
+            <div className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex flex-col h-full">
+              <div className="aspect-[3/5] relative">
+                <blockquote
+                  className="tiktok-embed"
+                  cite={`https://www.tiktok.com/@ozono.vida.huaraz/video/${companyData.tiktok.videos[ 0 ].id}`}
+                  data-video-id={companyData.tiktok.videos[ 0 ].id}
+                  style={{ maxWidth: '100%', minWidth: '100%', width: '100%', height: '100%' }}
+                >
+                  <section>
+                    <a
+                      target="_blank"
+                      title="@ozono.vida.huaraz"
+                      href={companyData.tiktok.url}
+                      rel="noopener noreferrer"
+                    >
+                      @ozono.vida.huaraz
+                    </a>
+                  </section>
+                </blockquote>
+                <script async src="https://www.tiktok.com/embed.js"></script>
               </div>
-              <div className="p-4">
-                <h4 className="font-semibold text-corporate-text-dark dark:text-white mb-2">
-                  Testimonio de Ozonoterapia
-                </h4>
-                <p className="text-sm text-corporate-text-muted dark:text-gray-300">
-                  Conoce la experiencia real de nuestros pacientes
+              <div className="p-4 flex flex-col justify-between h-full">
+                <div className="flex items-start justify-around mb-2">
+                  <h4 className="font-bold text-corporate-text-dark dark:text-white text-sm leading-tight flex items-center">
+                    <MapPin className="w-4 h-4 mr-2 text-corporate-blue flex-shrink-0" />
+                    {companyData.tiktok.videos[ 0 ].title}
+                  </h4>
+                </div>
+                <p className="text-xs text-corporate-text-muted dark:text-gray-300 mb-3 leading-relaxed line-clamp-2 flex-grow">
+                  {companyData.tiktok.videos[ 0 ].description}
                 </p>
+                <a
+                  href={companyData.tiktok.videos[ 0 ].url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-corporate-blue hover:text-corporate-blue-light text-xs font-semibold transition-all duration-200 hover:translate-x-1 group text-center"
+                >
+                  <span>Ver en TikTok</span>
+                  <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-0.5 transition-transform" />
+                </a>
               </div>
-            </a>
+            </div>
 
-            {/* Video 2 */}
-            <a
-              href="https://www.tiktok.com/@ozonovidahuaraz"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-              aria-label="Ver consejos de salud en TikTok"
-            >
-              <div className="aspect-[9/16] bg-gradient-to-br from-corporate-red to-pink-500 relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-white/30 transition-colors">
-                      <Heart className="w-8 h-8" />
-                    </div>
-                    <h3 className="font-bold text-lg mb-2">Consejos de Salud</h3>
-                    <p className="text-sm opacity-90">Tips diarios</p>
-                  </div>
-                </div>
-                <div className="absolute top-3 right-3">
-                  <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
-                    <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
-                    </svg>
-                  </div>
-                </div>
+            {/* Video 2 - Plasma Rico en Plaquetas */}
+            <div className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex flex-col h-full">
+              <div className="aspect-[3/5] relative">
+                <blockquote
+                  className="tiktok-embed"
+                  cite={`https://www.tiktok.com/@ozono.vida.huaraz/video/${companyData.tiktok.videos[ 1 ].id}`}
+                  data-video-id={companyData.tiktok.videos[ 1 ].id}
+                  style={{ maxWidth: '100%', minWidth: '100%', width: '100%', height: '100%' }}
+                >
+                  <section>
+                    <a
+                      target="_blank"
+                      title="@ozono.vida.huaraz"
+                      href={companyData.tiktok.url}
+                      rel="noopener noreferrer"
+                    >
+                      @ozono.vida.huaraz
+                    </a>
+                  </section>
+                </blockquote>
+                <script async src="https://www.tiktok.com/embed.js"></script>
               </div>
-              <div className="p-4">
-                <h4 className="font-semibold text-corporate-text-dark dark:text-white mb-2">
-                  Consejos de Bienestar
-                </h4>
-                <p className="text-sm text-corporate-text-muted dark:text-gray-300">
-                  Tips diarios para mejorar tu calidad de vida
+              <div className="p-4 flex flex-col justify-between h-full">
+                <div className="flex items-start justify-around mb-2">
+                  <h4 className="font-bold text-corporate-text-dark dark:text-white text-sm leading-tight flex items-center">
+                    <Heart className="w-4 h-4 mr-2 text-corporate-red flex-shrink-0" />
+                    {companyData.tiktok.videos[ 1 ].title}
+                  </h4>
+                </div>
+                <p className="text-xs text-corporate-text-muted dark:text-gray-300 mb-3 leading-relaxed line-clamp-2 flex-grow">
+                  {companyData.tiktok.videos[ 1 ].description}
                 </p>
+                <a
+                  href={companyData.tiktok.videos[ 1 ].url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-corporate-blue hover:text-corporate-blue-light text-xs font-semibold transition-all duration-200 hover:translate-x-1 group text-center"
+                >
+                  <span>Ver en TikTok</span>
+                  <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-0.5 transition-transform" />
+                </a>
               </div>
-            </a>
+            </div>
 
-            {/* Video 3 */}
-            <a
-              href="https://www.tiktok.com/@ozonovidahuaraz"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-              aria-label="Ver detrás de escenas en TikTok"
-            >
-              <div className="aspect-[9/16] bg-gradient-to-br from-corporate-blue-light to-green-400 relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-white/30 transition-colors">
-                      <Users className="w-8 h-8" />
-                    </div>
-                    <h3 className="font-bold text-lg mb-2">Detrás de Escenas</h3>
-                    <p className="text-sm opacity-90">Nuestro día a día</p>
-                  </div>
-                </div>
-                <div className="absolute top-3 right-3">
-                  <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
-                    <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
-                    </svg>
-                  </div>
-                </div>
+            {/* Video 3 - Hernia Discal */}
+            <div className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex flex-col h-full">
+              <div className="aspect-[3/5] relative">
+                <blockquote
+                  className="tiktok-embed"
+                  cite={`https://www.tiktok.com/@ozono.vida.huaraz/video/${companyData.tiktok.videos[ 2 ].id}`}
+                  data-video-id={companyData.tiktok.videos[ 2 ].id}
+                  style={{ maxWidth: '100%', minWidth: '100%', width: '100%', height: '100%' }}
+                >
+                  <section>
+                    <a
+                      target="_blank"
+                      title="@ozono.vida.huaraz"
+                      href={companyData.tiktok.url}
+                      rel="noopener noreferrer"
+                    >
+                      @ozono.vida.huaraz
+                    </a>
+                  </section>
+                </blockquote>
+                <script async src="https://www.tiktok.com/embed.js"></script>
               </div>
-              <div className="p-4">
-                <h4 className="font-semibold text-corporate-text-dark dark:text-white mb-2">
-                  Conoce Nuestro Equipo
-                </h4>
-                <p className="text-sm text-corporate-text-muted dark:text-gray-300">
-                  El día a día en nuestra clínica
+              <div className="p-4 flex flex-col justify-between h-full">
+                <div className="flex justify-around">
+                  <h4 className="font-bold text-corporate-text-dark dark:text-white text-sm leading-tight flex items-center">
+                    <Target className="w-4 h-4 mr-2 text-green-600 flex-shrink-0" />
+                    {companyData.tiktok.videos[ 2 ].title}
+                  </h4>
+                </div>
+                <p className="text-xs text-corporate-text-muted dark:text-gray-300 mb-3 leading-relaxed line-clamp-2 flex-grow">
+                  {companyData.tiktok.videos[ 2 ].description}
                 </p>
+                <a
+                  href={companyData.tiktok.videos[ 2 ].url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-corporate-blue hover:text-corporate-blue-light text-xs font-semibold transition-all duration-200 hover:translate-x-1 group text-center"
+                >
+                  <span>Ver en TikTok</span>
+                  <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-0.5 transition-transform" />
+                </a>
               </div>
-            </a>
+            </div>
           </div>
 
           {/* Botón para seguir en TikTok */}
           <div className="text-center mt-8">
             <a
-              href="https://www.tiktok.com/@ozonovidahuaraz"
+              href={companyData.tiktok.url}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 bg-black text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
@@ -512,25 +670,25 @@ export default function Home() {
             </div>
 
           </div>
-        </div>
-        {/* Estadísticas */}
-        <div className="bg-gradient-to-br from-corporate-blue/5 to-corporate-blue-light/5 rounded-2xl p-6">
-          <div className="grid grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-corporate-blue-light mb-2">500+</div>
-              <div className="text-corporate-text-muted dark:text-gray-300 font-medium text-sm">Pacientes Felices</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-corporate-blue-light mb-2">5+</div>
-              <div className="text-corporate-text-muted dark:text-gray-300 font-medium text-sm">Años de Experiencia</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-corporate-blue-light mb-2">98%</div>
-              <div className="text-corporate-text-muted dark:text-gray-300 font-medium text-sm">Satisfacción</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-corporate-blue-light mb-2">15+</div>
-              <div className="text-corporate-text-muted dark:text-gray-300 font-medium text-sm">Tratamientos</div>
+          {/* Estadísticas */}
+          <div className="bg-gradient-to-br from-corporate-blue/5 to-corporate-blue-light/5 rounded-2xl p-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="text-center">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-corporate-blue-light mb-2">500+</div>
+                <div className="text-corporate-text-muted dark:text-gray-300 font-medium text-xs sm:text-sm">Pacientes Felices</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-corporate-blue-light mb-2">5+</div>
+                <div className="text-corporate-text-muted dark:text-gray-300 font-medium text-xs sm:text-sm">Años de Experiencia</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-corporate-blue-light mb-2">98%</div>
+                <div className="text-corporate-text-muted dark:text-gray-300 font-medium text-xs sm:text-sm">Satisfacción</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-corporate-blue-light mb-2">15+</div>
+                <div className="text-corporate-text-muted dark:text-gray-300 font-medium text-xs sm:text-sm">Tratamientos</div>
+              </div>
             </div>
           </div>
         </div>
@@ -558,7 +716,8 @@ export default function Home() {
       <section className="py-20 bg-corporate-gray-light dark:bg-gray-800">
         <div className="container mx-auto px-4 md:px-8 lg:px-4 max-w-7xl">
           {/* Título de la sección */}
-          <div className="text-center mb-16">
+
+          <div className="text-center mb-2 sm:mb-16">{/* margin bottom 2 en móvil, 16 en sm y superior */}
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-corporate-blue mb-4">
               Contáctanos
             </h2>
@@ -569,58 +728,92 @@ export default function Home() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Información de contacto y botones de acción */}
-            <div className="space-y-8">
-              {/* Información de contacto */}
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-corporate-blue rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-white" />
+            <div className="space-y-4 sm:space-y-8">{/* space-y 4 en móvil, 8 en sm y superior */}
+              {/* Información de contacto - Diseño Adaptativo */}
+              <div className="space-y-4 sm:space-y-6">
+                {/* Ubicación */}
+                <div className="flex flex-col sm:flex-row sm:items-start space-y-3 sm:space-y-0 sm:space-x-4 p-4 sm:p-0 bg-white/5 dark:bg-gray-800/30 sm:bg-transparent dark:sm:bg-transparent rounded-xl sm:rounded-none backdrop-blur-sm sm:backdrop-blur-none transition-all duration-300 hover:bg-white/10 dark:hover:bg-gray-800/50 sm:hover:bg-transparent dark:sm:hover:bg-transparent">
+                  <div className="flex items-center space-x-3 sm:space-x-0 sm:flex-col sm:items-center">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-corporate-blue to-corporate-blue-light rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
+                      <MapPin className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
+                    </div>
+                    <div className="sm:hidden">
+                      <h4 className="font-bold text-corporate-text-dark dark:text-white text-sm">Ubicación</h4>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-corporate-text-dark dark:text-white mb-1">Ubicación</h4>
-                    <p className="text-corporate-text-muted dark:text-gray-300">
-                      {companyData.address}<br />
-                      {companyData.location}
+                  <div className="flex-1 sm:ml-0">
+                    <h4 className="hidden sm:block font-semibold text-corporate-text-dark dark:text-white mb-1 text-base lg:text-lg">Ubicación</h4>
+                    <p className="text-corporate-text-muted dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+                      <span className="block sm:inline">{companyData.address}</span>
+                      <span className="hidden sm:inline"><br /></span>
+                      <span className="block sm:inline">{companyData.location}</span>
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-corporate-blue rounded-full flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-white" />
+                {/* Teléfono */}
+                <div className="flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 p-4 sm:p-0 bg-white/5 dark:bg-gray-800/30 sm:bg-transparent dark:sm:bg-transparent rounded-xl sm:rounded-none backdrop-blur-sm sm:backdrop-blur-none transition-all duration-300 hover:bg-white/10 dark:hover:bg-gray-800/50 sm:hover:bg-transparent dark:sm:hover:bg-transparent">
+                  <div className="flex items-center space-x-3 sm:space-x-0 sm:flex-col sm:items-center">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-corporate-blue to-corporate-blue-light rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
+                      <Phone className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
+                    </div>
+                    <div className="sm:hidden">
+                      <h4 className="font-bold text-corporate-text-dark dark:text-white text-sm">Teléfono</h4>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-corporate-text-dark dark:text-white mb-1">Teléfono</h4>
-                    <p className="text-corporate-text-muted dark:text-gray-300">{companyData.phone}</p>
+                  <div className="flex-1 sm:ml-0">
+                    <h4 className="hidden sm:block font-semibold text-corporate-text-dark dark:text-white mb-1 text-base lg:text-lg">Teléfono</h4>
+                    <p className="text-corporate-text-muted dark:text-gray-300 text-sm sm:text-base">
+                      <a href={`tel:${companyData.phone}`} className="hover:text-corporate-blue transition-colors duration-200">
+                        {companyData.phone}
+                      </a>
+                    </p>
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-corporate-red rounded-full flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-6 h-6 text-white" />
+                {/* Email */}
+                <div className="flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 p-4 sm:p-0 bg-white/5 dark:bg-gray-800/30 sm:bg-transparent dark:sm:bg-transparent rounded-xl sm:rounded-none backdrop-blur-sm sm:backdrop-blur-none transition-all duration-300 hover:bg-white/10 dark:hover:bg-gray-800/50 sm:hover:bg-transparent dark:sm:hover:bg-transparent">
+                  <div className="flex items-center space-x-3 sm:space-x-0 sm:flex-col sm:items-center">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-corporate-red to-pink-500 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
+                      <Mail className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
+                    </div>
+                    <div className="sm:hidden">
+                      <h4 className="font-bold text-corporate-text-dark dark:text-white text-sm">Email</h4>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-corporate-text-dark dark:text-white mb-1">Email</h4>
-                    <p className="text-corporate-text-muted dark:text-gray-300">{companyData.email}</p>
+                  <div className="flex-1 sm:ml-0">
+                    <h4 className="hidden sm:block font-semibold text-corporate-text-dark dark:text-white mb-1 text-base lg:text-lg">Email</h4>
+                    <p className="text-corporate-text-muted dark:text-gray-300 text-sm sm:text-base">
+                      <a href={`mailto:${companyData.email}`} className="hover:text-corporate-red transition-colors duration-200 break-all">
+                        {companyData.email}
+                      </a>
+                    </p>
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-corporate-blue-light rounded-full flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-6 h-6 text-white" />
+                {/* Horarios */}
+                <div className="flex flex-col sm:flex-row sm:items-start space-y-3 sm:space-y-0 sm:space-x-4 p-4 sm:p-0 bg-white/5 dark:bg-gray-800/30 sm:bg-transparent dark:sm:bg-transparent rounded-xl sm:rounded-none backdrop-blur-sm sm:backdrop-blur-none transition-all duration-300 hover:bg-white/10 dark:hover:bg-gray-800/50 sm:hover:bg-transparent dark:sm:hover:bg-transparent">
+                  <div className="flex items-center space-x-3 sm:space-x-0 sm:flex-col sm:items-center">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-corporate-blue-light to-cyan-400 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
+                      <Clock className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
+                    </div>
+                    <div className="sm:hidden">
+                      <h4 className="font-bold text-corporate-text-dark dark:text-white text-sm">Horarios</h4>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-corporate-text-dark dark:text-white mb-1">Horarios de Atención</h4>
-                    <p className="text-corporate-text-muted dark:text-gray-300">
-                      {companyData.hours.weekdays}<br />
-                      {companyData.hours.saturday}
+                  <div className="flex-1 sm:ml-0">
+                    <h4 className="hidden sm:block font-semibold text-corporate-text-dark dark:text-white mb-1 text-base lg:text-lg">Horarios de Atención</h4>
+                    <p className="text-corporate-text-muted dark:text-gray-300 text-sm sm:text-base">
+                      <span className="block sm:inline">{companyData.hours.weekdays}</span>
+                      <span className="block sm:inline sm:ml-2">·</span>
+                      <span className="block sm:inline sm:ml-2">{companyData.hours.saturday}</span>
                     </p>
                   </div>
                 </div>
               </div>
 
               {/* Botones de acción */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-6">
+              <div className="flex flex-col sm:flex-row gap-4 pt-2 lg:pt-9">{/* padding top 2 en móvil y tablet, 9 en laptop y superior */}
                 <button
                   onClick={() => setIsAppointmentModalOpen(true)}
                   className="btn-gradient-corporate flex items-center justify-center space-x-2 px-6 py-3 text-center"

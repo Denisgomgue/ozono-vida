@@ -2,8 +2,8 @@
   "name": "Ozono Vida",
   "location": "Huaraz, Huaraz, Perú",
   "address": "Av. Villón, frente a la Dirección Víctor Ramos Guardia",
-  "phone": "+51 988 126 804",
-  "whatsapp": "+51 988 126 804",
+  "phone": "+51 901 276 092",
+  "whatsapp": "+51 901 276 092",
   "email": "ozonovidahuaraz@gmail.com",
   "hours": {
     "weekdays": "L-V 9:00 - 19:00",
@@ -14,5 +14,32 @@
     "directions": "https://maps.app.goo.gl/c6F63q3tJqLJVPhT6",
     "width": "600",
     "height": "450"
+  },
+  "tiktok": {
+    "handle": "@ozono.vida.huaraz",
+    "url": "https://www.tiktok.com/@ozono.vida.huaraz",
+    "videos": [
+      {
+        "id": "7558873442603339015",
+        "title": "Ubicación del Centro Médico",
+        "description": "Ubicación del centro médico Ozono Vida",
+        "url": "https://www.tiktok.com/@ozono.vida.huaraz/video/7558873442603339015",
+        "type": "ubicacion"
+      },
+      {
+        "id": "7555505873548889362",
+        "title": "Plasma Rico en Plaquetas",
+        "description": "Tratamiento de plasma rico en plaquetas para regeneración celular",
+        "url": "https://www.tiktok.com/@ozono.vida.huaraz/video/7555505873548889362",
+        "type": "prp"
+      },
+      {
+        "id": "7556083121465199879",
+        "title": "Hernia Discal",
+        "description": "Tratamiento de hernia discal con ozonoterapia",
+        "url": "https://www.tiktok.com/@ozono.vida.huaraz/video/7556083121465199879",
+        "type": "hernia"
+      }
+    ]
   }
 }
