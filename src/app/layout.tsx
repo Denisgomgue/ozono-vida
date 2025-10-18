@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { TopBar } from "@/components/layout/TopBar";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
@@ -32,6 +33,7 @@ export default function RootLayout({
           disableTransitionOnChange={false}
         >
           <div className="flex flex-col min-h-screen">
+            <TopBar />
             <Header />
             <main className="flex-1">
               {children}

@@ -16,7 +16,7 @@ export function Navigation() {
             title: 'Servicios',
             items: [
                 { name: 'Ozonoterapia', href: '/servicios/ozonoterapia' },
-                { name: 'Plasma Rico en Plaquetas', href: '/servicios/plasma-rico-plaquetas' },
+                { name: 'Plasma Rico en Plaquetas', href: '/servicios/prp' },
                 { name: 'Medicina Regenerativa', href: '/servicios/medicina-regenerativa' },
                 { name: 'Cóctel de Vida', href: '/servicios/coctel-vida' }
             ]
@@ -149,7 +149,7 @@ export function Navigation() {
                                 <Link
                                     key={item.href}
                                     href={item.href}
-                                    className="block  px-2 py-3 text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light  hover:font-bold transition-all duration-300 rounded-md"
+                                    className="block  px-2 py-3 text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light transition-all duration-300 rounded-md"
                                 >
                                     {item.name}
                                 </Link>
@@ -168,7 +168,7 @@ export function Navigation() {
                         <div className="py-2">
                             {navigationData.tratamientos.items.map((item) => (
                                 <div key={item.href} className="relative group/submenu">
-                                    <button className="w-full flex items-center justify-between  px-2 py-3 text-base text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light group-hover/submenu:text-white dark:group-hover/submenu:text-white group-hover/submenu:bg-corporate-blue-light dark:group-hover/submenu:bg-corporate-blue-light  hover:font-bold transition-all duration-300 rounded-md">
+                                    <button className="w-full flex items-center justify-between  px-2 py-3 text-base text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light group-hover/submenu:text-white dark:group-hover/submenu:text-white group-hover/submenu:bg-corporate-blue-light dark:group-hover/submenu:bg-corporate-blue-light transition-all duration-300 rounded-md">
                                         <span>{item.name}</span>
                                         {item.submenu && <Plus className="w-3 h-3" />}
                                     </button>
@@ -179,7 +179,7 @@ export function Navigation() {
                                                     <div key={subItem.href}>
                                                         {subItem.submenu ? (
                                                             <div className="relative group/subsubmenu">
-                                                                <button className="w-full flex items-center justify-between  px-4 py-3 text-base text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light group-hover/subsubmenu:text-white dark:group-hover/subsubmenu:text-white group-hover/subsubmenu:bg-corporate-blue-light dark:group-hover/subsubmenu:bg-corporate-blue-light hover:font-bold transition-all duration-300 rounded-md">
+                                                                <button className="w-full flex items-center justify-between  px-4 py-3 text-base text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light group-hover/subsubmenu:text-white dark:group-hover/subsubmenu:text-white group-hover/subsubmenu:bg-corporate-blue-light dark:group-hover/subsubmenu:bg-corporate-blue-light transition-all duration-300 rounded-md">
                                                                     <span>{subItem.name}</span>
                                                                     <Plus className="w-3 h-3" />
                                                                 </button>
@@ -189,7 +189,7 @@ export function Navigation() {
                                                                             <Link
                                                                                 key={subSubItem.href}
                                                                                 href={subSubItem.href}
-                                                                                className="block  px-2 py-2 text-sm text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light  hover:font-bold transition-all duration-300 rounded-md"
+                                                                                className="block  px-2 py-2 text-sm text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light transition-all duration-300 rounded-md"
                                                                             >
                                                                                 {subSubItem.name}
                                                                             </Link>
@@ -200,7 +200,7 @@ export function Navigation() {
                                                         ) : (
                                                             <Link
                                                                 href={subItem.href}
-                                                                className="block  px-2 py-3 text-base text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light  hover:font-bold transition-all duration-300 rounded-md"
+                                                                className="block  px-2 py-3 text-base text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light transition-all duration-300 rounded-md"
                                                             >
                                                                 {subItem.name}
                                                             </Link>
@@ -228,7 +228,7 @@ export function Navigation() {
                                 <Link
                                     key={item.href}
                                     href={item.href}
-                                    className="block px-2 py-3 text-base text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light  hover:font-bold transition-all duration-300 rounded-md"
+                                    className="block px-2 py-3 text-base text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light transition-all duration-300 rounded-md"
                                 >
                                     {item.name}
                                 </Link>

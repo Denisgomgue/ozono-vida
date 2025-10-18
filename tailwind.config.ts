@@ -49,6 +49,10 @@ const config: Config = {
                 md: "calc(var(--radius) - 2px)",
                 sm: "calc(var(--radius) - 4px)",
             },
+            transitionDuration: {
+                '1500': '1500ms',
+                '2000': '2000ms',
+            },
             animation: {
                 "fade-in": "fadeIn 0.5s ease-in-out",
                 "slide-in": "slideIn 0.3s ease-out",

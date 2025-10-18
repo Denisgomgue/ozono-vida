@@ -1,7 +1,7 @@
 'use client';
 
 import { Logo } from '@/components/ui/Logo';
-import { Heart, Shield, Zap, Users, Phone, Mail, MapPin, CheckCircle, Star, Clock, Award, Calendar, MessageCircle, ArrowRight, Target, Play, Quote } from 'lucide-react';
+import { Heart, Shield, Zap, Users, Phone, Mail, MapPin, CheckCircle, Star, Clock, Award, Calendar, MessageCircle, ArrowRight, Target, Play, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import companyData from '@/data/company.json';
 import { AppointmentModal } from '@/components/ui/AppointmentModal';
@@ -9,6 +9,45 @@ import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [ isAppointmentModalOpen, setIsAppointmentModalOpen ] = useState(false);
+  const [ currentImageIndex, setCurrentImageIndex ] = useState(0);
+
+  // Array de imágenes del hero
+  const heroImages = [
+    '/images/hero/image1.png',
+    '/images/hero/image2.png',
+    '/images/hero/image3.png',
+    '/images/hero/image4.png',
+    '/images/hero/image5.png',
+    '/images/hero/image6.png',
+    '/images/hero/image7.png',
+    '/images/hero/image8.png',
+    '/images/hero/image9.png',
+    '/images/hero/image10.png',
+  ];
+
+  // Auto-slider cada 5 segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [ heroImages.length ]);
+
+  // Funciones de navegación manual
+  const goToPrevious = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? heroImages.length - 1 : prevIndex - 1
+    );
+  };
+
+  const goToNext = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1
+    );
+  };
 
   useEffect(() => {
     // Cargar el script de TikTok embed
@@ -26,116 +65,112 @@ export default function Home() {
     };
   }, []);
 
+  // Navegación con teclado
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowLeft') {
+        goToPrevious();
+      } else if (event.key === 'ArrowRight') {
+        goToNext();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
-      {/* Top Bar con información de contacto */}
-      <div className="bg-corporate-blue-light text-white py-3">
-        <div className="container mx-auto px-4 md:px-8 lg:px-4">
-          {/* Mobile Layout */}
-          <div className="block md:hidden">
-            <div className="grid grid-cols-1 gap-3 text-center">
-              <div className="flex items-center justify-center space-x-4">
-                <div className="flex items-center space-x-2">
-                  <Phone className="w-4 h-4" />
-                  <span className="text-sm">{companyData.phone}</span>
-                </div>
-              </div>
-              <div className="flex items-center justify-center space-x-2">
-                <Mail className="w-4 h-4" />
-                <span className="text-sm">{companyData.email}</span>
-              </div>
-              <div className="flex items-center justify-center space-x-2">
-                <Clock className="w-4 h-4" />
-                <span className="text-sm">{companyData.hours.weekdays} · {companyData.hours.saturday}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Desktop Layout */}
-          <div className="hidden md:flex items-center justify-between text-sm">
-            <div className="flex items-center space-x-6">
-              <div className="flex items-center space-x-2">
-                <Phone className="w-4 h-4" />
-                <span>{companyData.phone}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Mail className="w-4 h-4" />
-                <span>{companyData.email}</span>
-              </div>
-            </div>
-            <div className="flex items-center space-x-2">
-              <span>Horario: {companyData.hours.weekdays} · {companyData.hours.saturday}</span>
-              <Clock className="w-4 h-4" />
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Hero Section con imagen de fondo */}
-      <section className="relative bg-gradient-to-br from-corporate-blue to-corporate-blue-dark py-40 text-white">
-        {/* Imagen de fondo */}
-        <div className="absolute inset-0 opacity-20">
-          <Image
-            src="/images/hero/imagen1.jpeg"
-            alt="Tratamiento de Ozonoterapia"
-            fill
-            className="object-cover"
-            priority
-          />
+      <section className="relative bg-gradient-to-br from-corporate-blue to-corporate-blue-dark py-32 text-white overflow-hidden">
+        {/* Slider de imágenes de fondo */}
+        <div className="absolute inset-0">
+          {heroImages.map((image, index) => (
+            <div
+              key={image}
+              className={`absolute inset-0 transition-opacity duration-1500 ease-in-out ${index === currentImageIndex ? 'opacity-90' : 'opacity-0'
+                }`}
+            >
+              <Image
+                src={image}
+                alt={`Tratamiento de Ozonoterapia ${index + 1}`}
+                fill
+                className="object-cover"
+                priority={index === 0}
+              />
+            </div>
+          ))}
         </div>
 
-        {/* Overlay para mejor legibilidad */}
-        <div className="absolute inset-0 bg-black/60"></div>
+        {/* Capa de viñeta negra */}
+        <div className="absolute inset-0 bg-black/30"></div>
+
+        {/* Flechas de navegación en los extremos de la pantalla */}
+        <button
+          onClick={goToPrevious}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 backdrop-blur-sm rounded-full p-3 transition-all duration-300 group"
+          aria-label="Imagen anterior"
+        >
+          <ChevronLeft className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+        </button>
+
+        <button
+          onClick={goToNext}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 backdrop-blur-sm rounded-full p-3 transition-all duration-300 group"
+          aria-label="Siguiente imagen"
+        >
+          <ChevronRight className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+        </button>
 
         <div className="container mx-auto px-4 md:px-8 lg:px-4 relative z-10 max-w-7xl">
+
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6">
-                <span className="text-white md:text-6xl">Medicina regenerativa ozonoterapia, aliviamos el dolor</span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                <span className="text-white">Medicina </span>
+                <span className="text-corporate-blue-light">regenerativa</span>
+                <span className="text-white"> ozonoterapia, </span>
+                <span className="text-corporate-blue-light drop-shadow-[0_2px_1px_rgba(255, 255, 255, 0.918)]">aliviamos el dolor</span>
               </h1>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   href="/reservar-cita"
-                  className="btn-gradient-corporate text-lg lg:text-xl px-8 py-4 lg:px-10 lg:py-5"
+                  className="btn-gradient-corporate text-base lg:text-lg px-6 py-3 lg:px-8 lg:py-4"
                 >
                   Reservar Cita Ahora
                 </a>
-                <a href="/servicios" className="border-2 border-corporate-white text-corporate-white hover:bg-corporate-white hover:text-corporate-blue px-8 py-4 lg:px-10 lg:py-5 rounded-lg font-semibold transition-colors text-center text-lg lg:text-xl">
+                <a href="/servicios" className="border-2 border-corporate-white text-corporate-white hover:bg-corporate-white hover:text-corporate-blue px-6 py-3 lg:px-8 lg:py-4 rounded-lg font-semibold transition-colors text-center text-base lg:text-lg">
                   Ver Servicios
                 </a>
               </div>
             </div>
             <div className="relative">
-              <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-8 border border-white/30 shadow-xl">
-                <div className="grid grid-cols-1 gap-6">
-                  <div className="flex items-center space-x-4">
-                    <CheckCircle className="w-10 h-10 text-corporate-blue-light drop-shadow-lg" />
-                    <div>
-                      <h3 className="font-bold text-lg lg:text-xl text-white drop-shadow-md">Tratamientos Avanzados</h3>
-                      <p className="text-base lg:text-lg text-white/90 drop-shadow-sm">Tecnología de vanguardia</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <Award className="w-10 h-10 lg:w-12 lg:h-12 text-corporate-blue-light drop-shadow-lg" />
-                    <div>
-                      <h3 className="font-bold text-lg lg:text-xl text-white drop-shadow-md">Profesionales Certificados</h3>
-                      <p className="text-base lg:text-lg text-white/90 drop-shadow-sm">Experiencia garantizada</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <Heart className="w-10 h-10 lg:w-12 lg:h-12 text-corporate-blue-light drop-shadow-lg" />
-                    <div>
-                      <h3 className="font-bold text-lg lg:text-xl text-white drop-shadow-md">Atención Personalizada</h3>
-                      <p className="text-base lg:text-lg text-white/90 drop-shadow-sm">Cuidado integral</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
             </div>
           </div>
         </div>
       </section>
+
+      {/* Indicadores del slider fuera del hero */}
+      <div className="bg-white dark:bg-gray-900 py-4">
+        <div className="container mx-auto px-4 md:px-8 lg:px-4 max-w-7xl">
+          <div className="flex justify-center space-x-3">
+            {heroImages.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentImageIndex(index)}
+                className={`rounded-full transition-all duration-300 ${index === currentImageIndex
+                  ? 'bg-corporate-blue w-8 h-2'
+                  : 'bg-gray-300 hover:bg-gray-400 w-2 h-2'
+                  }`}
+                aria-label={`Ir a imagen ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* Características Destacadas */}
       {/* <section className="py-16 bg-corporate-gray-light dark:bg-gray-800">
@@ -195,8 +230,8 @@ export default function Home() {
               <span>Nuestros Servicios</span>
             </div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-corporate-text-dark dark:text-white mb-6 leading-tight">
-              Tratamientos de
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-corporate-blue to-corporate-blue-light"> Excelencia</span>
+              <span className="text-corporate-blue">Tratamientos</span> de
+              <span className="text-corporate-red"> Excelencia</span>
             </h2>
             <p className="text-xl md:text-2xl text-corporate-text-muted dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Ofrecemos tratamientos innovadores y efectivos para mejorar tu salud y bienestar con tecnología de vanguardia.
@@ -401,8 +436,8 @@ export default function Home() {
       <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4 md:px-8 lg:px-4 max-w-7xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-corporate-text-dark dark:text-white mb-4">
-              Síguenos en TikTok
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold dark:text-white mb-4">
+              <span className="text-corporate-blue">Síguenos</span> en <span className="text-corporate-red">TikTok</span>
             </h2>
             <p className="text-xl text-corporate-text-muted dark:text-gray-300 max-w-2xl mx-auto">
               Descubre testimonios reales, consejos de salud y el día a día de nuestra clínica
@@ -577,8 +612,8 @@ export default function Home() {
 
               {/* Título principal */}
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-corporate-text-dark dark:text-white mb-6 leading-tight">
-                Clinica Ozono Vida
-                <span className="text-corporate-blue block">Aliviamos el dolor</span>
+                <span className="text-corporate-blue dark:text-corporate-red">Clinica Ozono Vida </span>
+                <span className="text-corporate-blue-light block">Aliviamos el dolor</span>
               </h2>
 
               {/* Descripción concisa */}
@@ -698,7 +733,7 @@ export default function Home() {
       <section className="py-20 gradient-primary text-white">
         <div className="container mx-auto px-4 md:px-8 lg:px-4 max-w-7xl text-center">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
-            ¿Listo para mejorar tu salud?
+            ¿Listo para <span className="text-yellow-300">mejorar tu salud</span>?
           </h2>
           <p className="text-xl md:text-2xl lg:text-3xl mb-8 max-w-2xl mx-auto text-white opacity-90">
             Agenda tu cita hoy y comienza tu camino hacia una mejor calidad de vida.
@@ -718,8 +753,8 @@ export default function Home() {
           {/* Título de la sección */}
 
           <div className="text-center mb-2 sm:mb-16">{/* margin bottom 2 en móvil, 16 en sm y superior */}
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-corporate-blue mb-4">
-              Contáctanos
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+              <span className="text-corporate-blue dark:text-corporate-blue-light">Contáctanos Hoy</span>
             </h2>
             <p className="text-xl md:text-2xl text-corporate-text-muted dark:text-gray-300 max-w-2xl mx-auto">
               Estamos aquí para ayudarte. Contáctanos de la manera que prefieras.
@@ -889,7 +924,7 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-8 lg:px-4 max-w-7xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-corporate-text-dark dark:text-white mb-6">
-              Lo que dicen nuestros pacientes
+              Lo que dicen <span className="text-corporate-blue">nuestros</span> <span className="text-corporate-red">pacientes</span>
             </h2>
             <p className="text-xl text-corporate-text-muted dark:text-gray-300 max-w-3xl mx-auto">
               Historias reales de recuperación y mejora en la calidad de vida de quienes confiaron en nosotros

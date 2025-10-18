@@ -20,8 +20,9 @@
 
   /* Corporate colors */
   --corporate-blue: #215096;
+  /* rgba(32, 80, 151) - hsl(216, 65%, 36%) */
   --corporate-blue-light: #64b2e7;
-  --corporate-red: #E53935;
+  --corporate-red: #E53E3E;
   --corporate-white: #ffffff;
   --corporate-gray-light: #f8fafc;
   --corporate-gray-medium: #e2e8f0;
@@ -115,6 +116,42 @@ body {
   h6 {
     color: hsl(var(--foreground));
   }
+
+  /* Estilos específicos para h1 en páginas de servicios */
+  .services-page h1 {
+    color: var(--primary) !important;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    line-height: 1.2;
+  }
+
+  .dark .services-page h1 {
+    color: white !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Estilos adicionales para mejorar visibilidad */
+  .services-page h1.text-white {
+    color: white !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .services-page h1.text-corporate-text-dark {
+    color: var(--corporate-text-dark) !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Degradado para span dentro de h1 en páginas de servicios */
+  .services-page h1 span.text-transparent {
+    background: linear-gradient(135deg, var(--corporate-text-dark), var(--corporate-blue-light)) !important;
+    -webkit-background-clip: text !important;
+    /* -webkit-text-fill-color: transparent !important; */
+    background-clip: text !important;
+    /* text-fill-color: transparent !important; */
+    filter: drop-shadow(2px 4px 8px rgba(255, 255, 255, 0.466)) drop-shadow(0px 2px 4px rgba(255, 255, 255, 0.514));
+  }
+
+
 
   p {
     color: hsl(var(--muted-foreground));
@@ -211,6 +248,19 @@ body {
     box-shadow: 0 12px 32px rgba(100, 178, 231, 0.5);
   }
 
+  /* Gradientes rojo-azul corporativos */
+  .gradient-red-blue-1 {
+    background: linear-gradient(135deg, var(--corporate-red), var(--corporate-blue));
+  }
+
+  .gradient-red-blue-2 {
+    background: linear-gradient(90deg, var(--corporate-red), var(--corporate-blue-light), var(--corporate-blue));
+  }
+
+  .gradient-red-blue-3 {
+    background: linear-gradient(180deg, var(--corporate-blue), var(--corporate-red));
+  }
+
   .gradient-whatsapp {
     background: linear-gradient(135deg, #128C7E, #25D366);
   }
@@ -241,6 +291,37 @@ body {
     box-shadow: 0 12px 32px rgba(37, 211, 102, 0.5);
   }
 
+  /* Botones con gradientes rojo-azul */
+  .btn-gradient-red-blue-1 {
+    @apply text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg;
+    background: linear-gradient(135deg, var(--corporate-red), var(--corporate-blue));
+  }
+
+  .btn-gradient-red-blue-1:hover {
+    background: linear-gradient(135deg, var(--corporate-blue), var(--corporate-red));
+    box-shadow: 0 12px 32px rgba(229, 62, 62, 0.5);
+  }
+
+  .btn-gradient-red-blue-2 {
+    @apply text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg;
+    background: linear-gradient(90deg, var(--corporate-red), var(--corporate-blue-light), var(--corporate-blue));
+  }
+
+  .btn-gradient-red-blue-2:hover {
+    background: linear-gradient(90deg, var(--corporate-blue), var(--corporate-blue-light), var(--corporate-red));
+    box-shadow: 0 12px 32px rgba(100, 178, 231, 0.5);
+  }
+
+  .btn-gradient-red-blue-3 {
+    @apply text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg;
+    background: linear-gradient(180deg, var(--corporate-blue), var(--corporate-red));
+  }
+
+  .btn-gradient-red-blue-3:hover {
+    background: linear-gradient(180deg, var(--corporate-red), var(--corporate-blue));
+    box-shadow: 0 12px 32px rgba(33, 80, 150, 0.5);
+  }
+
   .text-gradient-title {
     background: linear-gradient(135deg, #ffffff 0%, #64b2e7 100%);
     -webkit-background-clip: text;
@@ -255,6 +336,28 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  }
+
+  /* Gradientes de texto rojo-azul */
+  .text-gradient-red-blue-1 {
+    background: linear-gradient(135deg, var(--corporate-red) 0%, var(--corporate-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-red-blue-2 {
+    background: linear-gradient(90deg, var(--corporate-red) 0%, var(--corporate-blue-light) 50%, var(--corporate-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-red-blue-3 {
+    background: linear-gradient(180deg, var(--corporate-blue) 0%, var(--corporate-red) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .card {
