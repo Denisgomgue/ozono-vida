@@ -3,6 +3,7 @@
 import { Logo } from '@/components/ui/Logo';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { Navigation } from './Navigation';
+import Link from 'next/link';
 
 export function Header() {
     return (
@@ -11,9 +12,9 @@ export function Header() {
             <div className="container mx-auto px-4 md:px-8 lg:px-4 max-w-7xl">
                 <div className="flex items-center justify-between h-20">
                     {/* Logo como enlace */}
-                    <a href="/" className="flex items-center">
+                    <Link href="/" className="flex items-center">
                         <Logo size="md" />
-                    </a>
+                    </Link>
 
                     {/* Desktop Navigation */}
                     <Navigation />

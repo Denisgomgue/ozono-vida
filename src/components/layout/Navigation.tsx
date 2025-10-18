@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { ChevronDown, Plus, Menu, X } from 'lucide-react';
 import { Logo } from '@/components/ui/Logo';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 export function Navigation() {
     const [ openDropdown, setOpenDropdown ] = useState<string | null>(null);

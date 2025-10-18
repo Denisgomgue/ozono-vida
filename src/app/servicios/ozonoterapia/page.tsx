@@ -1,6 +1,6 @@
 'use client';
 
-import { Shield, Zap, CheckCircle, Clock, Award, Users, ArrowRight, Phone, Mail, MapPin, Star, ChevronLeft, ChevronRight, ChevronDown, Calendar } from 'lucide-react';
+import { Shield, Zap, CheckCircle, Award, Users, ArrowRight, Phone, Mail, MapPin, Star, ChevronLeft, ChevronRight, ChevronDown, Calendar } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import companyData from '@/data/company.json';
@@ -585,7 +585,7 @@ export default function OzonoterapiaPage() {
                                     </div>
                                 </div>
                                 <blockquote className="text-corporate-text-dark dark:text-white text-lg mb-6 leading-relaxed">
-                                    "{testimonio.testimonial}"
+                                    &quot;{testimonio.testimonial}&quot;
                                 </blockquote>
                                 <div className="border-t pt-6">
                                     <h4 className="font-semibold text-corporate-text-dark dark:text-white">{testimonio.name}</h4>

@@ -600,9 +600,9 @@ export default function CoctelVidaPage() {
                     ))}
                   </div>
                 </div>
-                <blockquote className="text-corporate-text-dark dark:text-white text-lg mb-6 leading-relaxed">
-                  "{testimonio.testimonial}"
-                </blockquote>
+                                <blockquote className="text-corporate-text-dark dark:text-white text-lg mb-6 leading-relaxed">
+                                  &quot;{testimonio.testimonial}&quot;
+                                </blockquote>
                 <div className="border-t pt-6">
                   <h4 className="font-semibold text-corporate-text-dark dark:text-white">{testimonio.name}</h4>
                   <p className="text-sm text-corporate-text-muted dark:text-gray-400">{testimonio.condition}</p>

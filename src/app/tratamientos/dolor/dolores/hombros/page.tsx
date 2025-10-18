@@ -1,6 +1,6 @@
 'use client';
 
-import { Shield, CheckCircle, ArrowRight, Phone, Mail, MapPin, ChevronDown, Calendar, Activity, Heart } from 'lucide-react';
+import { CheckCircle, ArrowRight, Phone, Mail, MapPin, ChevronDown, Calendar, Activity, Heart } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import companyData from '@/data/company.json';

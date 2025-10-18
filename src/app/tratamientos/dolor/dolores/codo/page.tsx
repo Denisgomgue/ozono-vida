@@ -1,9 +1,8 @@
 'use client';
 
-import { ArrowRight, Phone, Calendar, Activity } from 'lucide-react';
+import { ArrowRight, Calendar, Activity } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import companyData from '@/data/company.json';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 
 export default function DolorCodoPage() {

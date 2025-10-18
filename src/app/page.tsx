@@ -1,11 +1,10 @@
 'use client';
 
-import { Logo } from '@/components/ui/Logo';
-import { Heart, Shield, Zap, Users, Phone, Mail, MapPin, CheckCircle, Star, Clock, Award, Calendar, MessageCircle, ArrowRight, Target, Play, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Heart, Shield, Zap, Phone, Mail, MapPin, CheckCircle, Star, Clock, ArrowRight, Target, Quote, ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
 import Image from 'next/image';
 import companyData from '@/data/company.json';
 import { AppointmentModal } from '@/components/ui/AppointmentModal';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 export default function Home() {
   const [ isAppointmentModalOpen, setIsAppointmentModalOpen ] = useState(false);
@@ -37,17 +36,17 @@ export default function Home() {
   }, [ heroImages.length ]);
 
   // Funciones de navegación manual
-  const goToPrevious = () => {
+  const goToPrevious = useCallback(() => {
     setCurrentImageIndex((prevIndex) =>
       prevIndex === 0 ? heroImages.length - 1 : prevIndex - 1
     );
-  };
+  }, [heroImages.length]);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     setCurrentImageIndex((prevIndex) =>
       prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1
     );
-  };
+  }, [heroImages.length]);
 
   useEffect(() => {
     // Cargar el script de TikTok embed
@@ -77,7 +76,7 @@ export default function Home() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [goToPrevious, goToNext]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
@@ -944,8 +943,8 @@ export default function Home() {
               </div>
 
               <blockquote className="text-corporate-text-dark dark:text-white text-lg mb-6 leading-relaxed">
-                "La ozonoterapia cambió completamente mi vida. Después de años sufriendo dolor de rodilla,
-                en solo 4 sesiones ya no siento molestias. El equipo es muy profesional y la atención excelente."
+                &quot;La ozonoterapia cambió completamente mi vida. Después de años sufriendo dolor de rodilla,
+                en solo 4 sesiones ya no siento molestias. El equipo es muy profesional y la atención excelente.&quot;
               </blockquote>
 
               <div className="flex items-center">
@@ -971,8 +970,8 @@ export default function Home() {
               </div>
 
               <blockquote className="text-corporate-text-dark dark:text-white text-lg mb-6 leading-relaxed">
-                "Increíble la mejora en mi artritis. El plasma rico en plaquetas me ayudó mucho.
-                El doctor explica todo muy claro y se nota que realmente se preocupa por sus pacientes."
+                &quot;Increíble la mejora en mi artritis. El plasma rico en plaquetas me ayudó mucho.
+                El doctor explica todo muy claro y se nota que realmente se preocupa por sus pacientes.&quot;
               </blockquote>
 
               <div className="flex items-center">
@@ -998,8 +997,8 @@ export default function Home() {
               </div>
 
               <blockquote className="text-corporate-text-dark dark:text-white text-lg mb-6 leading-relaxed">
-                "Excelente atención y resultados. El cóctel de vida me ayudó a recuperar mi energía
-                y vitalidad. Definitivamente recomiendo Ozono Vida a todos mis conocidos."
+                &quot;Excelente atención y resultados. El cóctel de vida me ayudó a recuperar mi energía
+                y vitalidad. Definitivamente recomiendo Ozono Vida a todos mis conocidos.&quot;
               </blockquote>
 
               <div className="flex items-center">
