@@ -444,3 +444,64 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Custom Select Styles para formularios */
+.custom-select option {
+  padding: 12px;
+  background: white;
+  color: #1e293b;
+}
+
+.custom-select option:hover {
+  background: #f1f5f9;
+}
+
+.custom-select option:checked {
+  background: var(--corporate-blue);
+  color: white;
+}
+
+.dark .custom-select option {
+  background: #1f2937;
+  color: #f9fafb;
+}
+
+.dark .custom-select option:hover {
+  background: #374151;
+}
+
+.dark .custom-select option:checked {
+  background: var(--corporate-blue);
+  color: white;
+}
+
+/* Scrollbar Hide */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+.modal-scroll::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.modal-scroll::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.modal-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-height: 600px) {
+  .modal-container {
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+}

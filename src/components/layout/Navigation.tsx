@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { ChevronDown, Plus, Menu, X } from 'lucide-react';
 import { Logo } from '@/components/ui/Logo';
+import { AppointmentButton } from '@/components/ui/AppointmentButton';
 
 export function Navigation() {
     const [ openDropdown, setOpenDropdown ] = useState<string | null>(null);
@@ -138,7 +139,7 @@ export function Navigation() {
             <nav className="hidden xl:flex items-center space-x-6">
                 {/* Servicios */}
                 <div className="relative group">
-                    <button className="flex items-center space-x-1 text-lg font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light group-hover:text-white dark:group-hover:text-white group-hover:bg-corporate-blue-light dark:group-hover:bg-corporate-blue-light px-4 py-2 rounded-lg transition-all duration-300">
+                    <button className="flex items-center space-x-1 text-lg font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue dark:hover:bg-corporate-blue group-hover:text-white dark:group-hover:text-white group-hover:bg-corporate-blue dark:group-hover:bg-corporate-blue px-4 py-2 rounded-lg transition-all duration-300">
                         <span>{navigationData.servicios.title}</span>
                         <ChevronDown className="w-4 h-4" />
                     </button>
@@ -148,7 +149,7 @@ export function Navigation() {
                                 <Link
                                     key={item.href}
                                     href={item.href}
-                                    className="block  px-2 py-3 text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light transition-all duration-300 rounded-md"
+                                    className="block  px-2 py-3 text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue dark:hover:bg-corporate-blue transition-all duration-300 rounded-md"
                                 >
                                     {item.name}
                                 </Link>
@@ -159,7 +160,7 @@ export function Navigation() {
 
                 {/* Tratamientos */}
                 <div className="relative group">
-                    <button className="flex items-center space-x-1 text-lg font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light group-hover:text-white dark:group-hover:text-white group-hover:bg-corporate-blue-light dark:group-hover:bg-corporate-blue-light px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105">
+                    <button className="flex items-center space-x-1 text-lg font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue dark:hover:bg-corporate-blue group-hover:text-white dark:group-hover:text-white group-hover:bg-corporate-blue dark:group-hover:bg-corporate-blue px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105">
                         <span>{navigationData.tratamientos.title}</span>
                         <ChevronDown className="w-4 h-4" />
                     </button>
@@ -167,7 +168,7 @@ export function Navigation() {
                         <div className="py-2">
                             {navigationData.tratamientos.items.map((item) => (
                                 <div key={item.href} className="relative group/submenu">
-                                    <button className="w-full flex items-center justify-between  px-2 py-3 text-base text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light group-hover/submenu:text-white dark:group-hover/submenu:text-white group-hover/submenu:bg-corporate-blue-light dark:group-hover/submenu:bg-corporate-blue-light transition-all duration-300 rounded-md">
+                                    <button className="w-full flex items-center justify-between  px-2 py-3 text-base text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue dark:hover:bg-corporate-blue group-hover/submenu:text-white dark:group-hover/submenu:text-white group-hover/submenu:bg-corporate-blue dark:group-hover/submenu:bg-corporate-blue transition-all duration-300 rounded-md">
                                         <span>{item.name}</span>
                                         {item.submenu && <Plus className="w-3 h-3" />}
                                     </button>
@@ -178,7 +179,7 @@ export function Navigation() {
                                                     <div key={subItem.href}>
                                                         {subItem.submenu ? (
                                                             <div className="relative group/subsubmenu">
-                                                                <button className="w-full flex items-center justify-between  px-4 py-3 text-base text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light group-hover/subsubmenu:text-white dark:group-hover/subsubmenu:text-white group-hover/subsubmenu:bg-corporate-blue-light dark:group-hover/subsubmenu:bg-corporate-blue-light transition-all duration-300 rounded-md">
+                                                                <button className="w-full flex items-center justify-between  px-4 py-3 text-base text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue dark:hover:bg-corporate-blue group-hover/subsubmenu:text-white dark:group-hover/subsubmenu:text-white group-hover/subsubmenu:bg-corporate-blue dark:group-hover/subsubmenu:bg-corporate-blue transition-all duration-300 rounded-md">
                                                                     <span>{subItem.name}</span>
                                                                     <Plus className="w-3 h-3" />
                                                                 </button>
@@ -188,7 +189,7 @@ export function Navigation() {
                                                                             <Link
                                                                                 key={subSubItem.href}
                                                                                 href={subSubItem.href}
-                                                                                className="block  px-2 py-2 text-sm text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light transition-all duration-300 rounded-md"
+                                                                                className="block  px-2 py-2 text-sm text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue dark:hover:bg-corporate-blue transition-all duration-300 rounded-md"
                                                                             >
                                                                                 {subSubItem.name}
                                                                             </Link>
@@ -199,7 +200,7 @@ export function Navigation() {
                                                         ) : (
                                                             <Link
                                                                 href={subItem.href}
-                                                                className="block  px-2 py-3 text-base text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light transition-all duration-300 rounded-md"
+                                                                className="block  px-2 py-3 text-base text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue dark:hover:bg-corporate-blue transition-all duration-300 rounded-md"
                                                             >
                                                                 {subItem.name}
                                                             </Link>
@@ -217,7 +218,7 @@ export function Navigation() {
 
                 {/* Aplicaciones */}
                 <div className="relative group">
-                    <button className="flex items-center space-x-1 text-lg font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light group-hover:text-white dark:group-hover:text-white group-hover:bg-corporate-blue-light dark:group-hover:bg-corporate-blue-light px-4 py-2 rounded-lg transition-all duration-300">
+                    <button className="flex items-center space-x-1 text-lg font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue dark:hover:bg-corporate-blue group-hover:text-white dark:group-hover:text-white group-hover:bg-corporate-blue dark:group-hover:bg-corporate-blue px-4 py-2 rounded-lg transition-all duration-300">
                         <span>{navigationData.aplicaciones.title}</span>
                         <ChevronDown className="w-4 h-4" />
                     </button>
@@ -227,7 +228,7 @@ export function Navigation() {
                                 <Link
                                     key={item.href}
                                     href={item.href}
-                                    className="block px-2 py-3 text-base text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light transition-all duration-300 rounded-md"
+                                    className="block px-2 py-3 text-base text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue dark:hover:bg-corporate-blue transition-all duration-300 rounded-md"
                                 >
                                     {item.name}
                                 </Link>
@@ -236,41 +237,37 @@ export function Navigation() {
                     </div>
                 </div>
 
-                <Link href="/nosotros" className="text-lg font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105">
+                <Link href="/#nosotros" className="text-lg font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue dark:hover:bg-corporate-blue px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105">
                     Nosotros
                 </Link>
-                <Link href="/contacto" className="text-lg font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105">
+                <Link href="/#contacto" className="text-lg font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue dark:hover:bg-corporate-blue px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105">
                     Contacto
                 </Link>
-                <Link href="/reservar-cita" className="btn-modern-gradient text-lg font-medium px-6 py-3">
-                    Reservar Cita
-                </Link>
+                <AppointmentButton variant="primary" size="md" />
             </nav>
 
             {/* Menú Intermedio (lg-xl) */}
-            <nav className="hidden lg:flex xl:hidden items-center space-x-4">
-                <Link href="/servicios" className="text-sm font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light px-3 py-2 rounded-lg transition-all duration-300 hover:scale-105">
+            <nav className="hidden lg:flex xl:hidden items-center space-x-2">
+                <Link href="/servicios" className="text-sm font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue dark:hover:bg-corporate-blue px-2 py-2 rounded-lg transition-all duration-300 hover:scale-105">
                     Servicios
                 </Link>
-                <Link href="/tratamientos" className="text-sm font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light px-3 py-2 rounded-lg transition-all duration-300 hover:scale-105">
+                <Link href="/tratamientos" className="text-sm font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue dark:hover:bg-corporate-blue px-2 py-2 rounded-lg transition-all duration-300 hover:scale-105">
                     Tratamientos
                 </Link>
-                <Link href="/aplicaciones" className="text-sm font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light px-3 py-2 rounded-lg transition-all duration-300 hover:scale-105">
+                <Link href="/aplicaciones" className="text-sm font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue dark:hover:bg-corporate-blue px-2 py-2 rounded-lg transition-all duration-300 hover:scale-105">
                     Aplicaciones
                 </Link>
-                <Link href="/nosotros" className="text-sm font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light px-3 py-2 rounded-lg transition-all duration-300 hover:scale-105">
+                <Link href="/#nosotros" className="text-sm font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue dark:hover:bg-corporate-blue px-2 py-2 rounded-lg transition-all duration-300 hover:scale-105">
                     Nosotros
                 </Link>
-                <Link href="/contacto" className="text-sm font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue-light dark:hover:bg-corporate-blue-light px-3 py-2 rounded-lg transition-all duration-300 hover:scale-105">
+                <Link href="/#contacto" className="text-sm font-medium text-gray-800 dark:text-white hover:text-white dark:hover:text-white hover:bg-corporate-blue dark:hover:bg-corporate-blue px-2 py-2 rounded-lg transition-all duration-300 hover:scale-105">
                     Contacto
                 </Link>
-                <Link href="/reservar-cita" className="btn-modern-gradient text-sm px-4 py-2">
-                    Reservar Cita
-                </Link>
+                <AppointmentButton variant="primary" size="md" />
             </nav>
 
-            {/* Menú Mobile */}
-            <div className="xl:hidden">
+            {/* Menú Mobile - Solo cuando el menú intermedio no cabe */}
+            <div className="lg:hidden">
                 <button
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
@@ -281,7 +278,7 @@ export function Navigation() {
 
             {/* Mobile Menu Overlay */}
             {isMobileMenuOpen && (
-                <div className="fixed inset-0 z-50 xl:hidden">
+                <div className="fixed inset-0 z-50 lg:hidden">
                     <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setIsMobileMenuOpen(false)} />
                     <div className="fixed top-0 right-0 h-full w-80 bg-white dark:bg-gray-800 shadow-xl flex flex-col">
                         {/* Header fijo */}
@@ -304,18 +301,22 @@ export function Navigation() {
                                 <div>
                                     <button
                                         onClick={() => setOpenDropdown(openDropdown === 'servicios' ? null : 'servicios')}
-                                        className="flex items-center justify-between w-full py-2 text-gray-700 dark:text-white hover:text-primary dark:hover:text-blue-400"
+                                        className={`flex items-center justify-between w-full py-2 px-3 rounded-lg transition-all duration-300 ${
+                                            openDropdown === 'servicios' 
+                                                ? 'bg-corporate-blue text-white' 
+                                                : 'text-gray-700 dark:text-white hover:bg-corporate-blue hover:text-white'
+                                        }`}
                                     >
                                         <span>Servicios</span>
                                         <ChevronDown className={`w-4 h-4 transition-transform ${openDropdown === 'servicios' ? 'rotate-180' : ''}`} />
                                     </button>
                                     {openDropdown === 'servicios' && (
-                                        <div className="ml-4 space-y-2">
+                                        <div className="ml-4 space-y-2 mt-2">
                                             {navigationData.servicios.items.map((item) => (
                                                 <Link
                                                     key={item.href}
                                                     href={item.href}
-                                                    className="block py-2 text-sm text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400"
+                                                    className="block py-2 px-3 text-sm text-gray-600 dark:text-white hover:bg-corporate-blue hover:text-white rounded-lg transition-all duration-300"
                                                 >
                                                     {item.name}
                                                 </Link>
@@ -328,29 +329,37 @@ export function Navigation() {
                                 <div>
                                     <button
                                         onClick={() => setOpenDropdown(openDropdown === 'tratamientos' ? null : 'tratamientos')}
-                                        className="flex items-center justify-between w-full py-2 text-gray-700 dark:text-white hover:text-primary dark:hover:text-blue-400"
+                                        className={`flex items-center justify-between w-full py-2 px-3 rounded-lg transition-all duration-300 ${
+                                            openDropdown === 'tratamientos' 
+                                                ? 'bg-corporate-blue text-white' 
+                                                : 'text-gray-700 dark:text-white hover:bg-corporate-blue hover:text-white'
+                                        }`}
                                     >
                                         <span>Tratamientos</span>
                                         <ChevronDown className={`w-4 h-4 transition-transform ${openDropdown === 'tratamientos' ? 'rotate-180' : ''}`} />
                                     </button>
                                     {openDropdown === 'tratamientos' && (
-                                        <div className="ml-4 space-y-2">
+                                        <div className="ml-4 space-y-2 mt-2">
                                             {navigationData.tratamientos.items.map((item) => (
                                                 <div key={item.href}>
                                                     <button
                                                         onClick={() => setOpenSubmenu(openSubmenu === item.href ? null : item.href)}
-                                                        className="flex items-center justify-between w-full py-2 text-sm text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400"
+                                                        className={`flex items-center justify-between w-full py-2 px-3 text-sm rounded-lg transition-all duration-300 ${
+                                                            openSubmenu === item.href 
+                                                                ? 'bg-corporate-blue text-white' 
+                                                                : 'text-gray-600 dark:text-white hover:bg-corporate-blue hover:text-white'
+                                                        }`}
                                                     >
                                                         <span>{item.name}</span>
                                                         {item.submenu && <Plus className="w-3 h-3" />}
                                                     </button>
                                                     {item.submenu && openSubmenu === item.href && (
-                                                        <div className="ml-4 space-y-1">
+                                                        <div className="ml-4 space-y-1 mt-2">
                                                             {item.submenu.map((subItem) => (
                                                                 <Link
                                                                     key={subItem.href}
                                                                     href={subItem.href}
-                                                                    className="block py-1 text-xs text-gray-500 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400"
+                                                                    className="block py-1 px-3 text-xs text-gray-500 dark:text-gray-300 hover:bg-corporate-blue hover:text-white rounded-lg transition-all duration-300"
                                                                 >
                                                                     {subItem.name}
                                                                 </Link>
@@ -367,18 +376,22 @@ export function Navigation() {
                                 <div>
                                     <button
                                         onClick={() => setOpenDropdown(openDropdown === 'aplicaciones' ? null : 'aplicaciones')}
-                                        className="flex items-center justify-between w-full py-2 text-gray-700 dark:text-white hover:text-primary dark:hover:text-blue-400"
+                                        className={`flex items-center justify-between w-full py-2 px-3 rounded-lg transition-all duration-300 ${
+                                            openDropdown === 'aplicaciones' 
+                                                ? 'bg-corporate-blue text-white' 
+                                                : 'text-gray-700 dark:text-white hover:bg-corporate-blue hover:text-white'
+                                        }`}
                                     >
                                         <span>Aplicaciones</span>
                                         <ChevronDown className={`w-4 h-4 transition-transform ${openDropdown === 'aplicaciones' ? 'rotate-180' : ''}`} />
                                     </button>
                                     {openDropdown === 'aplicaciones' && (
-                                        <div className="ml-4 space-y-2">
+                                        <div className="ml-4 space-y-2 mt-2">
                                             {navigationData.aplicaciones.items.map((item) => (
                                                 <Link
                                                     key={item.href}
                                                     href={item.href}
-                                                    className="block py-2 text-sm text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400"
+                                                    className="block py-2 px-3 text-sm text-gray-600 dark:text-white hover:bg-corporate-blue hover:text-white rounded-lg transition-all duration-300"
                                                 >
                                                     {item.name}
                                                 </Link>
@@ -387,15 +400,15 @@ export function Navigation() {
                                     )}
                                 </div>
 
-                                <Link href="/nosotros" className="block py-2 text-gray-700 dark:text-white hover:text-primary dark:hover:text-blue-400">
+                                <Link href="/#nosotros" className="block py-2 px-3 text-gray-700 dark:text-white hover:bg-corporate-blue hover:text-white rounded-lg transition-all duration-300" onClick={() => setIsMobileMenuOpen(false)}>
                                     Nosotros
                                 </Link>
-                                <Link href="/contacto" className="block py-2 text-gray-700 dark:text-white hover:text-primary dark:hover:text-blue-400">
+                                <Link href="/#contacto" className="block py-2 px-3 text-gray-700 dark:text-white hover:bg-corporate-blue hover:text-white rounded-lg transition-all duration-300" onClick={() => setIsMobileMenuOpen(false)}>
                                     Contacto
                                 </Link>
-                                <Link href="/reservar-cita" className="block w-full btn-modern-gradient text-center">
-                                    Reservar Cita
-                                </Link>
+                                <div onClick={() => setIsMobileMenuOpen(false)}>
+                                    <AppointmentButton variant="primary" size="md" fullWidth={true} />
+                                </div>
                             </nav>
                         </div>
                     </div>

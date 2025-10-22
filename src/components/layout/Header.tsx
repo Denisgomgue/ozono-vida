@@ -1,7 +1,6 @@
 'use client';
 
 import { Logo } from '@/components/ui/Logo';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { Navigation } from './Navigation';
 import Link from 'next/link';
 
@@ -18,11 +17,6 @@ export function Header() {
 
                     {/* Desktop Navigation */}
                     <Navigation />
-
-                    {/* Theme Toggle */}
-                    <div className="hidden xl:flex">
-                        <ThemeToggle />
-                    </div>
                 </div>
             </div>
         </header>

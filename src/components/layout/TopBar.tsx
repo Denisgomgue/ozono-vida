@@ -5,7 +5,7 @@ import companyData from '@/data/company.json';
 
 export function TopBar() {
     return (
-        <div className="bg-corporate-blue-light text-white py-3 dark:bg-gray-800">
+        <div className="bg-corporate-blue                                    text-white py-3 dark:bg-gray-800">
             <div className="container mx-auto px-4 md:px-8 lg:px-4 max-w-7xl">
                 {/* Mobile Layout */}
                 <div className="block md:hidden">

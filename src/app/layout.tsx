@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { TopBar } from "@/components/layout/TopBar";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { FloatingButtons } from "@/components/ui/FloatingButtons";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -39,6 +40,7 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
+            <FloatingButtons />
           </div>
         </ThemeProvider>
       </body>

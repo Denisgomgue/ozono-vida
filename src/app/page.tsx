@@ -1,13 +1,12 @@
 'use client';
 
-import { Heart, Shield, Zap, Phone, Mail, MapPin, CheckCircle, Star, Clock, ArrowRight, Target, Quote, ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
+import { Heart, Shield, Zap, Phone, Mail, MapPin, CheckCircle, Star, Clock, ArrowRight, Target, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import companyData from '@/data/company.json';
-import { AppointmentModal } from '@/components/ui/AppointmentModal';
+import { AppointmentButton } from '@/components/ui/AppointmentButton';
 import { useState, useEffect, useCallback } from 'react';
 
 export default function Home() {
-  const [ isAppointmentModalOpen, setIsAppointmentModalOpen ] = useState(false);
   const [ currentImageIndex, setCurrentImageIndex ] = useState(0);
 
   // Array de imágenes del hero
@@ -134,12 +133,7 @@ export default function Home() {
               </h1>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href="/reservar-cita"
-                  className="btn-gradient-corporate text-base lg:text-lg px-6 py-3 lg:px-8 lg:py-4"
-                >
-                  Reservar Cita Ahora
-                </a>
+                <AppointmentButton variant="primary" size="lg" text="Reservar Cita Ahora" />
                 <a href="/servicios" className="border-2 border-corporate-white text-corporate-white hover:bg-corporate-white hover:text-corporate-blue px-6 py-3 lg:px-8 lg:py-4 rounded-lg font-semibold transition-colors text-center text-base lg:text-lg">
                   Ver Servicios
                 </a>
@@ -413,12 +407,7 @@ export default function Home() {
                 Nuestro equipo médico te ayudará a elegir la mejor opción según tu condición específica.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button
-                  onClick={() => setIsAppointmentModalOpen(true)}
-                  className="btn-gradient-corporate px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                >
-                  Consulta Gratuita
-                </button>
+                <AppointmentButton variant="primary" size="lg" text="Consulta Gratuita" />
                 <a
                   href="/servicios"
                   className="bg-white dark:bg-gray-800 text-corporate-blue border-2 border-corporate-blue px-8 py-4 text-lg font-semibold rounded-xl hover:bg-corporate-blue hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg"
@@ -596,7 +585,7 @@ export default function Home() {
       </section>
 
       {/* Acerca de Nosotros - Rediseñado */}
-      <section className="py-20 bg-corporate-gray-light dark:bg-gray-800">
+      <section id="nosotros" className="py-20 bg-corporate-gray-light dark:bg-gray-800">
         <div className="container mx-auto px-4 md:px-8 lg:px-4 max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Lado izquierdo - Contenido */}
@@ -747,7 +736,7 @@ export default function Home() {
       </section>
 
       {/* Sección de Contacto Mejorada */}
-      <section className="py-20 bg-corporate-gray-light dark:bg-gray-800">
+      <section id="contacto" className="py-20 bg-corporate-gray-light dark:bg-gray-800">
         <div className="container mx-auto px-4 md:px-8 lg:px-4 max-w-7xl">
           {/* Título de la sección */}
 
@@ -848,13 +837,7 @@ export default function Home() {
 
               {/* Botones de acción */}
               <div className="flex flex-col sm:flex-row gap-4 pt-2 lg:pt-9">{/* padding top 2 en móvil y tablet, 9 en laptop y superior */}
-                <button
-                  onClick={() => setIsAppointmentModalOpen(true)}
-                  className="btn-gradient-corporate flex items-center justify-center space-x-2 px-6 py-3 text-center"
-                >
-                  <Calendar className="w-5 h-5" />
-                  <span>Reservar Cita</span>
-                </button>
+                <AppointmentButton variant="primary" size="md" />
                 <a
                   href={`https://wa.me/${companyData.whatsapp.replace(/\s/g, '').replace('+', '')}`}
                   target="_blank"
@@ -1031,11 +1014,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Modal de reserva de cita */}
-      <AppointmentModal
-        isOpen={isAppointmentModalOpen}
-        onClose={() => setIsAppointmentModalOpen(false)}
-      />
     </div>
   );
 }

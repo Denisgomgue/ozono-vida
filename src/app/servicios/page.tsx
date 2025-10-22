@@ -4,6 +4,7 @@ import { Shield, Zap, Heart, Target, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
+import { AppointmentButton } from '@/components/ui/AppointmentButton';
 
 export default function ServiciosPage() {
     const servicios = [
@@ -14,42 +15,42 @@ export default function ServiciosPage() {
             icon: Zap,
             color: 'from-corporate-blue to-corporate-blue-dark',
             image: '/images/services/servicios-ozonoterapia.png',
-            description: 'Tratamiento médico que utiliza ozono medicinal para regenerar tejidos, reducir inflamación y mejorar la salud integral.',
+            description: 'Tratamiento médico que utiliza ozono medicinal (O₃) para regenerar tejidos, reducir inflamación y tratar más de 200 enfermedades. Procedimiento ambulatorio sin efectos secundarios.',
             href: '/servicios/ozonoterapia',
-            benefits: [ 'Regeneración celular', 'Antiinflamatorio', 'Sin efectos secundarios' ]
+            benefits: [ 'Más de 200 enfermedades tratadas', 'Procedimiento ambulatorio', 'Sin efectos secundarios' ]
         },
         {
             id: 'prp',
             title: 'Plasma Rico en Plaquetas',
-            subtitle: 'Tratamiento regenerativo natural',
+            subtitle: 'Tratamiento regenerativo con tu propia sangre',
             icon: Heart,
             color: 'from-corporate-red to-pink-500',
             image: '/images/services/servicios-plasmaRicoPlaquetas.png',
-            description: 'Utiliza tu propia sangre para acelerar la curación y regeneración de tejidos de forma natural y efectiva.',
+            description: 'Utiliza tu propia sangre para acelerar la curación y regeneración de tejidos de forma natural. Ideal para lesiones deportivas, artrosis y regeneración celular.',
             href: '/servicios/prp',
-            benefits: [ '100% Natural', 'Sin rechazo', 'Resultados rápidos' ]
+            benefits: [ '100% Natural - Tu propia sangre', 'Sin rechazo inmunológico', 'Resultados rápidos y duraderos' ]
         },
         {
             id: 'medicina-regenerativa',
             title: 'Medicina Regenerativa',
-            subtitle: 'Terapias avanzadas',
+            subtitle: 'Terapias avanzadas de regeneración',
             icon: Target,
             color: 'from-green-500 to-emerald-600',
             image: '/images/services/servicios-medicinaRegenerativa.png',
-            description: 'Terapias avanzadas que estimulan la capacidad natural del cuerpo para regenerar tejidos y órganos dañados.',
+            description: 'Terapias avanzadas que estimulan la capacidad natural del cuerpo para regenerar tejidos y órganos dañados. Combinamos ozonoterapia con megadosis de vitamina C.',
             href: '/servicios/medicina-regenerativa',
-            benefits: [ 'Regeneración de tejidos', 'Mejora la función orgánica', 'Tratamiento personalizado' ]
+            benefits: [ 'Regeneración de tejidos dañados', 'Mejora la función orgánica', 'Tratamiento personalizado' ]
         },
         {
             id: 'coctel-vida',
             title: 'Cóctel de Vida',
-            subtitle: 'Terapia integral',
+            subtitle: 'Terapia integral de vitalidad',
             icon: Shield,
             color: 'from-purple-500 to-indigo-600',
             image: '/images/services/servicios-coctelVida.png',
-            description: 'Terapia combinada integral que potencia tu vitalidad, energía y bienestar general mediante múltiples tratamientos.',
+            description: 'Terapia combinada integral que potencia tu vitalidad, energía y bienestar general mediante múltiples tratamientos regenerativos. Ideal para mejorar la calidad de vida.',
             href: '/servicios/coctel-vida',
-            benefits: [ 'Energía vital', 'Bienestar integral', 'Resultados visibles' ]
+            benefits: [ 'Aumenta la energía vital', 'Bienestar integral', 'Resultados visibles desde la primera sesión' ]
         }
     ];
 
@@ -173,16 +174,10 @@ export default function ServiciosPage() {
                         ¿No estás seguro cuál servicio elegir?
                     </h2>
                     <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-white/90">
-                        Nuestro equipo médico te ayudará a elegir el tratamiento ideal según tu condición específica.
+                        Nuestro equipo médico especializado en medicina regenerativa te ayudará a elegir el tratamiento ideal según tu condición específica. Más de 200 enfermedades tratadas exitosamente.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link
-                            href="/reservar-cita"
-                            className="bg-white text-corporate-blue px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg inline-flex items-center justify-center space-x-2"
-                        >
-                            <span>Consulta Gratuita</span>
-                            <ArrowRight className="w-5 h-5" />
-                        </Link>
+                        <AppointmentButton variant="white" size="lg" text="Consulta Gratuita" />
                         <Link
                             href="/contacto"
                             className="border-2 border-white text-white hover:bg-white hover:text-corporate-blue px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300"
