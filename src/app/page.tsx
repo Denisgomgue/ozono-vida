@@ -39,13 +39,13 @@ export default function Home() {
     setCurrentImageIndex((prevIndex) =>
       prevIndex === 0 ? heroImages.length - 1 : prevIndex - 1
     );
-  }, [heroImages.length]);
+  }, [ heroImages.length ]);
 
   const goToNext = useCallback(() => {
     setCurrentImageIndex((prevIndex) =>
       prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1
     );
-  }, [heroImages.length]);
+  }, [ heroImages.length ]);
 
   useEffect(() => {
     // Cargar el script de TikTok embed
@@ -75,7 +75,7 @@ export default function Home() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [goToPrevious, goToNext]);
+  }, [ goToPrevious, goToNext ]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
@@ -123,13 +123,11 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-8 lg:px-4 relative z-10 max-w-7xl">
 
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 items-center">
             <div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                <span className="text-white">Medicina </span>
-                <span className="text-corporate-blue-light">regenerativa</span>
-                <span className="text-white"> ozonoterapia, </span>
-                <span className="text-corporate-blue-light drop-shadow-[0_2px_1px_rgba(255, 255, 255, 0.918)]">aliviamos el dolor</span>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+                <span className="text-white">Medicina  regenerativa</span>
+                <span className="text-corporate-blue/80 drop-shadow-[0_2px_1px_rgba(255, 255, 255, 0.918)] bg-corporate-blue-light px-4 py-4 rounded-2xl block mt-2 sm:text-xl md:text-2xl lg:text-xl w-fit lg:mx-0 text-xl">Tratamiento de dolor con ozonoterapia plasma rico en plaquetas</span>
               </h1>
 
               <div className="flex flex-col sm:flex-row gap-4">
