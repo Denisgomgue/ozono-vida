@@ -1,167 +1,39 @@
-'use client';
-
-import { Heart, Shield, Zap, Phone, Mail, MapPin, CheckCircle, Star, Clock, ArrowRight, Target, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import type { Metadata } from 'next';
+import { Heart, Shield, Zap, Phone, Mail, MapPin, CheckCircle, Star, Clock, ArrowRight, Target, Quote } from 'lucide-react';
 import Image from 'next/image';
 import companyData from '@/data/company.json';
 import { AppointmentButton } from '@/components/ui/AppointmentButton';
-import { useState, useEffect, useCallback } from 'react';
+import { HeroSlider } from '@/components/home/HeroSlider';
+import { TikTokSectionWrapper } from '@/components/home/TikTokSectionWrapper';
+
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://ozonovidahuaraz.com';
+
+export const metadata: Metadata = {
+  title: 'Inicio - Clínica de Ozonoterapia en Huaraz',
+  description: 'OZONO VIDA HUARAZ - Clínica especializada en ozonoterapia, medicina regenerativa, plasma rico en plaquetas (PRP) y cóctel de vida. Tratamientos efectivos para dolor, artritis, hernias discales y más en Huaraz, Perú.',
+  openGraph: {
+    title: 'OZONO VIDA HUARAZ - Clínica de Ozonoterapia y Medicina Regenerativa',
+    description: 'Clínica especializada en ozonoterapia y medicina regenerativa en Huaraz. Tratamientos para dolor, artritis, hernias discales y más.',
+    url: baseUrl,
+    images: [
+      {
+        url: `${baseUrl}/images/general/local_ozonovida.png`,
+        width: 1200,
+        height: 630,
+        alt: 'OZONO VIDA HUARAZ - Clínica de Ozonoterapia',
+      },
+    ],
+  },
+  alternates: {
+    canonical: baseUrl,
+  },
+};
 
 export default function Home() {
-  const [ currentImageIndex, setCurrentImageIndex ] = useState(0);
-
-  // Array de imágenes del hero
-  const heroImages = [
-    '/images/hero/image1.png',
-    '/images/hero/image2.png',
-    '/images/hero/image3.png',
-    '/images/hero/image4.png',
-    '/images/hero/image5.png',
-    '/images/hero/image6.png',
-    '/images/hero/image7.png',
-    '/images/hero/image8.png',
-    '/images/hero/image9.png',
-    '/images/hero/image10.png',
-  ];
-
-  // Auto-slider cada 5 segundos
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [ heroImages.length ]);
-
-  // Funciones de navegación manual
-  const goToPrevious = useCallback(() => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? heroImages.length - 1 : prevIndex - 1
-    );
-  }, [ heroImages.length ]);
-
-  const goToNext = useCallback(() => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1
-    );
-  }, [ heroImages.length ]);
-
-  useEffect(() => {
-    // Cargar el script de TikTok embed
-    const script = document.createElement('script');
-    script.src = 'https://www.tiktok.com/embed.js';
-    script.async = true;
-    document.head.appendChild(script);
-
-    return () => {
-      // Limpiar el script cuando el componente se desmonte
-      const existingScript = document.querySelector('script[src="https://www.tiktok.com/embed.js"]');
-      if (existingScript) {
-        document.head.removeChild(existingScript);
-      }
-    };
-  }, []);
-
-  // Navegación con teclado
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowLeft') {
-        goToPrevious();
-      } else if (event.key === 'ArrowRight') {
-        goToNext();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [ goToPrevious, goToNext ]);
-
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
-      {/* Hero Section con imagen de fondo */}
-      <section className="relative bg-gradient-to-br from-corporate-blue to-corporate-blue-dark py-32 text-white overflow-hidden">
-        {/* Slider de imágenes de fondo */}
-        <div className="absolute inset-0">
-          {heroImages.map((image, index) => (
-            <div
-              key={image}
-              className={`absolute inset-0 transition-opacity duration-1500 ease-in-out ${index === currentImageIndex ? 'opacity-90' : 'opacity-0'
-                }`}
-            >
-              <Image
-                src={image}
-                alt={`Tratamiento de Ozonoterapia ${index + 1}`}
-                fill
-                className="object-cover"
-                priority={index === 0}
-              />
-            </div>
-          ))}
-        </div>
-
-        {/* Capa de viñeta negra */}
-        <div className="absolute inset-0 bg-black/30"></div>
-
-        {/* Flechas de navegación en los extremos de la pantalla */}
-        <button
-          onClick={goToPrevious}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 backdrop-blur-sm rounded-full p-3 transition-all duration-300 group"
-          aria-label="Imagen anterior"
-        >
-          <ChevronLeft className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
-        </button>
-
-        <button
-          onClick={goToNext}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 backdrop-blur-sm rounded-full p-3 transition-all duration-300 group"
-          aria-label="Siguiente imagen"
-        >
-          <ChevronRight className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
-        </button>
-
-        <div className="container mx-auto px-4 md:px-8 lg:px-4 relative z-10 max-w-7xl">
-
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 items-center">
-            <div>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-                <span className="text-white">Medicina  regenerativa</span>
-                <span className="text-corporate-blue/80 drop-shadow-[0_2px_1px_rgba(255, 255, 255, 0.918)] bg-corporate-blue-light px-4 py-4 rounded-2xl block mt-2 sm:text-xl md:text-2xl lg:text-xl w-fit lg:mx-0 text-xl">Tratamiento de dolor con ozonoterapia plasma rico en plaquetas</span>
-              </h1>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <AppointmentButton variant="primary" size="lg" text="Reservar Cita Ahora" />
-                <a href="/servicios" className="border-2 border-corporate-white text-corporate-white hover:bg-corporate-white hover:text-corporate-blue px-6 py-3 lg:px-8 lg:py-4 rounded-lg font-semibold transition-colors text-center text-base lg:text-lg">
-                  Ver Servicios
-                </a>
-              </div>
-            </div>
-            <div className="relative">
-
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Indicadores del slider fuera del hero */}
-      <div className="bg-white dark:bg-gray-900 py-4">
-        <div className="container mx-auto px-4 md:px-8 lg:px-4 max-w-7xl">
-          <div className="flex justify-center space-x-3">
-            {heroImages.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentImageIndex(index)}
-                className={`rounded-full transition-all duration-300 ${index === currentImageIndex
-                  ? 'bg-corporate-blue w-8 h-2'
-                  : 'bg-gray-300 hover:bg-gray-400 w-2 h-2'
-                  }`}
-                aria-label={`Ir a imagen ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
+      {/* Hero Section */}
+      <HeroSlider />
 
       {/* Características Destacadas */}
       {/* <section className="py-16 bg-corporate-gray-light dark:bg-gray-800">
@@ -240,6 +112,9 @@ export default function Home() {
                   alt="Ozonoterapia"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                  quality={85}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
 
@@ -282,6 +157,9 @@ export default function Home() {
                   alt="Plasma Rico en Plaquetas"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                  quality={85}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
 
@@ -322,6 +200,9 @@ export default function Home() {
                   alt="Medicina Regenerativa"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                  quality={85}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
 
@@ -362,6 +243,9 @@ export default function Home() {
                   alt="Cóctel de Vida"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                  quality={85}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
 
@@ -419,168 +303,7 @@ export default function Home() {
       </section>
 
       {/* Sección de TikTok */}
-      <section className="py-16 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 md:px-8 lg:px-4 max-w-7xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold dark:text-white mb-4">
-              <span className="text-corporate-blue">Síguenos</span> en <span className="text-corporate-red">TikTok</span>
-            </h2>
-            <p className="text-xl text-corporate-text-muted dark:text-gray-300 max-w-2xl mx-auto">
-              Descubre testimonios reales, consejos de salud y el día a día de nuestra clínica
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {/* Video 1 - Ubicación del Centro Médico */}
-            <div className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex flex-col h-full">
-              <div className="aspect-[3/5] relative">
-                <blockquote
-                  className="tiktok-embed"
-                  cite={`https://www.tiktok.com/@ozono.vida.huaraz/video/${companyData.tiktok.videos[ 0 ].id}`}
-                  data-video-id={companyData.tiktok.videos[ 0 ].id}
-                  style={{ maxWidth: '100%', minWidth: '100%', width: '100%', height: '100%' }}
-                >
-                  <section>
-                    <a
-                      target="_blank"
-                      title="@ozono.vida.huaraz"
-                      href={companyData.tiktok.url}
-                      rel="noopener noreferrer"
-                    >
-                      @ozono.vida.huaraz
-                    </a>
-                  </section>
-                </blockquote>
-                <script async src="https://www.tiktok.com/embed.js"></script>
-              </div>
-              <div className="p-4 flex flex-col justify-between h-full">
-                <div className="flex items-start justify-around mb-2">
-                  <h4 className="font-bold text-corporate-text-dark dark:text-white text-sm leading-tight flex items-center">
-                    <MapPin className="w-4 h-4 mr-2 text-corporate-blue flex-shrink-0" />
-                    {companyData.tiktok.videos[ 0 ].title}
-                  </h4>
-                </div>
-                <p className="text-xs text-corporate-text-muted dark:text-gray-300 mb-3 leading-relaxed line-clamp-2 flex-grow">
-                  {companyData.tiktok.videos[ 0 ].description}
-                </p>
-                <a
-                  href={companyData.tiktok.videos[ 0 ].url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-corporate-blue hover:text-corporate-blue-light text-xs font-semibold transition-all duration-200 hover:translate-x-1 group text-center"
-                >
-                  <span>Ver en TikTok</span>
-                  <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-0.5 transition-transform" />
-                </a>
-              </div>
-            </div>
-
-            {/* Video 2 - Plasma Rico en Plaquetas */}
-            <div className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex flex-col h-full">
-              <div className="aspect-[3/5] relative">
-                <blockquote
-                  className="tiktok-embed"
-                  cite={`https://www.tiktok.com/@ozono.vida.huaraz/video/${companyData.tiktok.videos[ 1 ].id}`}
-                  data-video-id={companyData.tiktok.videos[ 1 ].id}
-                  style={{ maxWidth: '100%', minWidth: '100%', width: '100%', height: '100%' }}
-                >
-                  <section>
-                    <a
-                      target="_blank"
-                      title="@ozono.vida.huaraz"
-                      href={companyData.tiktok.url}
-                      rel="noopener noreferrer"
-                    >
-                      @ozono.vida.huaraz
-                    </a>
-                  </section>
-                </blockquote>
-                <script async src="https://www.tiktok.com/embed.js"></script>
-              </div>
-              <div className="p-4 flex flex-col justify-between h-full">
-                <div className="flex items-start justify-around mb-2">
-                  <h4 className="font-bold text-corporate-text-dark dark:text-white text-sm leading-tight flex items-center">
-                    <Heart className="w-4 h-4 mr-2 text-corporate-red flex-shrink-0" />
-                    {companyData.tiktok.videos[ 1 ].title}
-                  </h4>
-                </div>
-                <p className="text-xs text-corporate-text-muted dark:text-gray-300 mb-3 leading-relaxed line-clamp-2 flex-grow">
-                  {companyData.tiktok.videos[ 1 ].description}
-                </p>
-                <a
-                  href={companyData.tiktok.videos[ 1 ].url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-corporate-blue hover:text-corporate-blue-light text-xs font-semibold transition-all duration-200 hover:translate-x-1 group text-center"
-                >
-                  <span>Ver en TikTok</span>
-                  <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-0.5 transition-transform" />
-                </a>
-              </div>
-            </div>
-
-            {/* Video 3 - Hernia Discal */}
-            <div className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex flex-col h-full">
-              <div className="aspect-[3/5] relative">
-                <blockquote
-                  className="tiktok-embed"
-                  cite={`https://www.tiktok.com/@ozono.vida.huaraz/video/${companyData.tiktok.videos[ 2 ].id}`}
-                  data-video-id={companyData.tiktok.videos[ 2 ].id}
-                  style={{ maxWidth: '100%', minWidth: '100%', width: '100%', height: '100%' }}
-                >
-                  <section>
-                    <a
-                      target="_blank"
-                      title="@ozono.vida.huaraz"
-                      href={companyData.tiktok.url}
-                      rel="noopener noreferrer"
-                    >
-                      @ozono.vida.huaraz
-                    </a>
-                  </section>
-                </blockquote>
-                <script async src="https://www.tiktok.com/embed.js"></script>
-              </div>
-              <div className="p-4 flex flex-col justify-between h-full">
-                <div className="flex justify-around">
-                  <h4 className="font-bold text-corporate-text-dark dark:text-white text-sm leading-tight flex items-center">
-                    <Target className="w-4 h-4 mr-2 text-green-600 flex-shrink-0" />
-                    {companyData.tiktok.videos[ 2 ].title}
-                  </h4>
-                </div>
-                <p className="text-xs text-corporate-text-muted dark:text-gray-300 mb-3 leading-relaxed line-clamp-2 flex-grow">
-                  {companyData.tiktok.videos[ 2 ].description}
-                </p>
-                <a
-                  href={companyData.tiktok.videos[ 2 ].url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-corporate-blue hover:text-corporate-blue-light text-xs font-semibold transition-all duration-200 hover:translate-x-1 group text-center"
-                >
-                  <span>Ver en TikTok</span>
-                  <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-0.5 transition-transform" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Botón para seguir en TikTok */}
-          <div className="text-center mt-8">
-            <a
-              href={companyData.tiktok.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 bg-black text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
-              aria-label="Seguir a Ozono Vida en TikTok"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
-              </svg>
-              <span>Síguenos en TikTok</span>
-            </a>
-          </div>
-        </div>
-      </section>
+      <TikTokSectionWrapper />
 
       {/* Acerca de Nosotros - Rediseñado */}
       <section id="nosotros" className="py-20 bg-corporate-gray-light dark:bg-gray-800">
@@ -671,6 +394,8 @@ export default function Home() {
                     height={400}
                     className="w-full h-80 object-cover"
                     priority
+                    quality={85}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   {/* Overlay sutil */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
