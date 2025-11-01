@@ -141,10 +141,7 @@ export function HeroSlider() {
         <div className="grid grid-cols-1 gap-2 items-center max-w-4xl">
           <div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-[1.3] text-white block drop-shadow-[1px_1px_20px_rgba(25,80,150,0.9)]">
-             
-                Medicina regenerativa, ozonoterapia, tratamiento del dolor
-              
-              
+              Medicina regenerativa, ozonoterapia y plasma rico en plaquetas
             </h1>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-4">
@@ -179,8 +176,8 @@ export function HeroSlider() {
               key={index}
               onClick={() => goToSlide(index)}
               className={`rounded-full transition-all duration-300 ${index === currentImageIndex
-                  ? 'bg-white w-8 h-2'
-                  : 'bg-white/50 hover:bg-white/75 w-2 h-2'
+                ? 'bg-white w-8 h-2'
+                : 'bg-white/50 hover:bg-white/75 w-2 h-2'
                 }`}
               aria-label={`Ir a imagen ${index + 1}`}
             />
