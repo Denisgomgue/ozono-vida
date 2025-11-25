@@ -93,23 +93,25 @@ export function AppointmentForm() {
                     mensaje: ''
                 });
             }, 3000);
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('Error al enviar el formulario:', err);
+
+            const error = err as { status?: number; text?: string; message?: string };
             console.error('Detalles del error:', {
-                status: err?.status,
-                text: err?.text,
-                message: err?.message
+                status: error?.status,
+                text: error?.text,
+                message: error?.message
             });
 
             // Mensaje de error más específico
             let errorMessage = 'Hubo un error al enviar tu solicitud. Por favor, intenta nuevamente o contáctanos directamente.';
 
-            if (err?.status === 400) {
+            if (error?.status === 400) {
                 errorMessage = 'Error 400: Verifica que el Service ID y Template ID estén correctamente configurados en tu archivo .env.local. Revisa la consola para más detalles.';
-            } else if (err?.text) {
-                errorMessage = `Error: ${err.text}. Por favor, verifica la configuración de EmailJS en tu archivo .env.local.`;
-            } else if (err?.message) {
-                errorMessage = err.message;
+            } else if (error?.text) {
+                errorMessage = `Error: ${error.text}. Por favor, verifica la configuración de EmailJS en tu archivo .env.local.`;
+            } else if (error?.message) {
+                errorMessage = error.message;
             }
 
             setError(errorMessage);
