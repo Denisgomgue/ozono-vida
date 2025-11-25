@@ -23,6 +23,10 @@ export function Logo({ className = '', size = 'md' }: LogoProps) {
                 className={`${sizeClasses[ size ]} object-contain`}
                 priority
             />
+            <div className="flex flex-col leading-none">
+                <span className="text-xl text-corporate-blue font-bold text-center">OZONO VIDA</span>
+                <span className="text-[15px] text-corporate-red font-bold text-center">TRATAMIENTO</span>
+            </div>
         </div>
     );
 }

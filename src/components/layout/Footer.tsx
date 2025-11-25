@@ -11,6 +11,7 @@ export function Footer() {
                     {/* Logo y Descripción */}
                     <div className="space-y-4">
                         <Logo size="md" />
+                        
                         <p className="text-gray-600 dark:text-gray-400 text-sm">
                             Clínica especializada en ozonoterapia y medicina regenerativa en Huaraz.
                             Tratamientos efectivos para mejorar tu calidad de vida.

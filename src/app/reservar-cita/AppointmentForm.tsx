@@ -1,16 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import { X, Calendar, Phone, Mail, User, MessageSquare, CheckCircle, Loader2, Stethoscope, ChevronDown } from 'lucide-react';
+import { useState } from 'react';
+import { Calendar, Phone, Mail, User, MessageSquare, CheckCircle, Loader2, Stethoscope, ChevronDown } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
-interface AppointmentModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-}
-
-export function AppointmentModal({ isOpen, onClose }: AppointmentModalProps) {
+export function AppointmentForm() {
     const [ formData, setFormData ] = useState({
         nombre: '',
         telefono: '',
@@ -22,31 +16,19 @@ export function AppointmentModal({ isOpen, onClose }: AppointmentModalProps) {
 
     const [ isSubmitting, setIsSubmitting ] = useState(false);
     const [ isSubmitted, setIsSubmitted ] = useState(false);
-    const [ mounted, setMounted ] = useState(false);
+    const [ error, setError ] = useState('');
 
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    const servicios = [
-        'Ozonoterapia',
-        'Plasma Rico en Plaquetas (PRP)',
-        'Medicina Regenerativa',
-        'Cóctel de Vida',
-        'Tratamiento de Artrosis',
-        'Tratamiento de Hernia Discal',
-        'Tratamiento de Várices',
-        'Tratamiento de Fibromialgia',
-        'Tratamiento de Pie Diabético',
-        'Tratamiento de Dolor Crónico',
-        'Megadosis de Vitamina C',
-        'Consulta General',
-        'Evaluación Médica'
-    ];
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        setFormData({
+            ...formData,
+            [ e.target.name ]: e.target.value
+        });
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
+        setError('');
 
         try {
             const publicKey = process.env.NEXT_PUBLIC_PUBLICK_KEY_EMAILJS;
@@ -99,11 +81,9 @@ export function AppointmentModal({ isOpen, onClose }: AppointmentModalProps) {
             setIsSubmitting(false);
             setIsSubmitted(true);
 
-            // Cerrar modal después de 3 segundos
+            // Resetear formulario después de 3 segundos
             setTimeout(() => {
                 setIsSubmitted(false);
-                onClose();
-                // Resetear formulario
                 setFormData({
                     nombre: '',
                     telefono: '',
@@ -132,71 +112,36 @@ export function AppointmentModal({ isOpen, onClose }: AppointmentModalProps) {
                 errorMessage = err.message;
             }
 
+            setError(errorMessage);
             setIsSubmitting(false);
-            // Mostrar error al usuario
-            alert(errorMessage);
         }
     };
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setFormData({
-            ...formData,
-            [ e.target.name ]: e.target.value
-        });
-    };
-
-    const handleClose = () => {
-        if (!isSubmitting) {
-            setIsSubmitted(false);
-            onClose();
-            // Resetear formulario
-            setFormData({
-                nombre: '',
-                telefono: '',
-                email: '',
-                servicio: '',
-                fecha: '',
-                mensaje: ''
-            });
-        }
-    };
-
-    if (!isOpen || !mounted) return null;
-
-    const modalContent = (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 min-h-screen">
-            {/* Overlay */}
-            <div
-                className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-                onClick={handleClose}
-            ></div>
-
-            {/* Modal */}
-            <div className="relative bg-white dark:bg-gray-900 rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[85vh] overflow-y-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                {/* Header con gradiente */}
-                <div className="p-6 rounded-t-3xl relative gradient-primary">
-                    <button
-                        onClick={handleClose}
-                        disabled={isSubmitting}
-                        className="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors disabled:opacity-50"
-                    >
-                        <X className="w-6 h-6" />
-                    </button>
-                    <div className="flex items-center space-x-3">
-                        <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                            <Calendar className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                            <h2 className="text-2xl font-bold text-white">Reserva tu cita</h2>
-                            <p className="text-white/80 text-sm">Completa el formulario y nos pondremos en contacto contigo</p>
-                        </div>
+    return (
+        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl overflow-hidden">
+            {/* Header del formulario */}
+            <div className="bg-gradient-to-r from-corporate-blue to-corporate-blue-light px-6 py-8 text-white">
+                <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                        <Calendar className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                        <h2 className="text-2xl font-bold text-white">Reserva tu cita</h2>
+                        <p className="text-blue-100">Completa el formulario y nos pondremos en contacto contigo</p>
                     </div>
                 </div>
+            </div>
 
-                {/* Contenido del modal */}
+            {/* Formulario */}
+            <div className="p-6 lg:p-8">
                 {!isSubmitted ? (
-                    <form onSubmit={handleSubmit} className="p-6">
-                        {/* Grid de 2 columnas en desktop */}
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        {error && (
+                            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-200 px-4 py-3 rounded-xl">
+                                <p className="text-sm">{error}</p>
+                            </div>
+                        )}
+
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             {/* Columna izquierda */}
                             <div className="space-y-6">
@@ -211,9 +156,9 @@ export function AppointmentModal({ isOpen, onClose }: AppointmentModalProps) {
                                         name="nombre"
                                         value={formData.nombre}
                                         onChange={handleInputChange}
-                                        className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-all"
-                                        placeholder="Ej. Juan Pérez"
                                         required
+                                        className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-corporate-blue focus:border-transparent dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-all"
+                                        placeholder="Ej. Juan Pérez"
                                     />
                                 </div>
 
@@ -228,9 +173,9 @@ export function AppointmentModal({ isOpen, onClose }: AppointmentModalProps) {
                                         name="telefono"
                                         value={formData.telefono}
                                         onChange={handleInputChange}
-                                        className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-all"
-                                        placeholder="Ej. +51 999 999 999"
                                         required
+                                        className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-corporate-blue focus:border-transparent dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-all"
+                                        placeholder="Ej. +51 999 999 999"
                                     />
                                 </div>
 
@@ -245,7 +190,7 @@ export function AppointmentModal({ isOpen, onClose }: AppointmentModalProps) {
                                         name="email"
                                         value={formData.email}
                                         onChange={handleInputChange}
-                                        className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-all"
+                                        className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-corporate-blue focus:border-transparent dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-all"
                                         placeholder="Ej. juan@email.com"
                                     />
                                 </div>
@@ -263,15 +208,15 @@ export function AppointmentModal({ isOpen, onClose }: AppointmentModalProps) {
                                             name="servicio"
                                             value={formData.servicio}
                                             onChange={handleInputChange}
-                                            className="w-full px-4 py-3 pr-10 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-all appearance-none cursor-pointer hover:border-blue-400"
                                             required
+                                            className="w-full px-4 py-3 pr-10 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-corporate-blue focus:border-transparent dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-all appearance-none cursor-pointer hover:border-corporate-blue-light custom-select"
                                         >
                                             <option value="">Selecciona un servicio</option>
-                                            {servicios.map((servicio) => (
-                                                <option key={servicio} value={servicio}>
-                                                    {servicio}
-                                                </option>
-                                            ))}
+                                            <option value="Ozonoterapia">Ozonoterapia</option>
+                                            <option value="Plasma Rico en Plaquetas">Plasma Rico en Plaquetas</option>
+                                            <option value="Medicina Regenerativa">Medicina Regenerativa</option>
+                                            <option value="Cóctel de Vida">Cóctel de Vida</option>
+                                            <option value="Consulta General">Consulta General</option>
                                         </select>
                                         <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
                                     </div>
@@ -288,8 +233,8 @@ export function AppointmentModal({ isOpen, onClose }: AppointmentModalProps) {
                                         name="fecha"
                                         value={formData.fecha}
                                         onChange={handleInputChange}
-                                        className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-all"
                                         required
+                                        className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-corporate-blue focus:border-transparent dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-all"
                                     />
                                 </div>
 
@@ -304,9 +249,9 @@ export function AppointmentModal({ isOpen, onClose }: AppointmentModalProps) {
                                         value={formData.mensaje}
                                         onChange={handleInputChange}
                                         rows={4}
-                                        className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-all resize-none"
+                                        className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-corporate-blue focus:border-transparent dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-all resize-none"
                                         placeholder="Cuéntanos más sobre tu consulta..."
-                                    />
+                                    ></textarea>
                                 </div>
                             </div>
                         </div>
@@ -316,7 +261,7 @@ export function AppointmentModal({ isOpen, onClose }: AppointmentModalProps) {
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center space-x-2 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none gradient-primary gradient-primary-hover"
+                                className="w-full inline-flex items-center justify-center space-x-2 bg-gradient-to-r from-corporate-blue to-corporate-blue-light text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                             >
                                 {isSubmitting ? (
                                     <>
@@ -325,15 +270,21 @@ export function AppointmentModal({ isOpen, onClose }: AppointmentModalProps) {
                                     </>
                                 ) : (
                                     <>
-                                        <span>Enviar solicitud</span>
                                         <Stethoscope className="w-5 h-5" />
+                                        <span>Enviar solicitud de cita</span>
                                     </>
                                 )}
                             </button>
                         </div>
+
+                        {/* Footer */}
+                        <div className="pt-4">
+                            <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
+                                Al enviar este formulario, aceptas que nos pongamos en contacto contigo para confirmar tu cita.
+                            </p>
+                        </div>
                     </form>
                 ) : (
-                    /* Animación de confirmación */
                     <div className="p-8 text-center">
                         <div className="animate-pulse">
                             <div className="w-20 h-20 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -353,18 +304,8 @@ export function AppointmentModal({ isOpen, onClose }: AppointmentModalProps) {
                         </div>
                     </div>
                 )}
-
-                {/* Footer */}
-                {!isSubmitted && (
-                    <div className="px-6 pb-6">
-                        <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
-                            Al enviar este formulario, aceptas que nos pongamos en contacto contigo para confirmar tu cita.
-                        </p>
-                    </div>
-                )}
             </div>
         </div>
     );
-
-    return createPortal(modalContent, document.body);
 }
+
