@@ -6,7 +6,7 @@ import { AppointmentButton } from '@/components/ui/AppointmentButton';
 import { HeroSlider } from '@/components/home/HeroSlider';
 import { TikTokSectionWrapper } from '@/components/home/TikTokSectionWrapper';
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://ozonovidahuaraz.com';
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL as string;
 
 export const metadata: Metadata = {
   title: 'Inicio - Clínica de Ozonoterapia en Huaraz',
