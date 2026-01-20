@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     "ozonoterapia Huaraz",
     "tratamiento del dolor"
   ],
-  authors: [{ name: "OZONO VIDA HUARAZ" }],
+  authors: [ { name: "OZONO VIDA HUARAZ" } ],
   creator: "OZONO VIDA HUARAZ",
   publisher: "OZONO VIDA HUARAZ",
   formatDetection: {
@@ -72,16 +72,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "OZONO VIDA HUARAZ - Clínica de Ozonoterapia",
     description: "Clínica especializada en ozonoterapia y medicina regenerativa en Huaraz",
-    images: [`${baseUrl}/images/general/local_ozonovida.png`],
+    images: [ `${baseUrl}/images/general/local_ozonovida.png` ],
     creator: "@ozono.vida.huaraz",
   },
   alternates: {
     canonical: baseUrl,
   },
   verification: {
-    // Aquí puedes agregar códigos de verificación cuando los tengas
-    // google: 'tu-codigo-google',
-    // yandex: 'tu-codigo-yandex',
+    google: 'AS74hIJlu-X89hqiOGP10kTH9Ljhw4utZ1a9lzWl-M4',
   },
   category: "Medicina",
 };
