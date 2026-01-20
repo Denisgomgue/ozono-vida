@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     default: "OZONO VIDA HUARAZ - Clínica de Ozonoterapia y Medicina Regenerativa",
     template: "%s | OZONO VIDA HUARAZ",
   },
-  description: "Clínica especializada en ozonoterapia, plasma rico en plaquetas (PRP), medicina regenerativa y cóctel de vida en Huaraz, Perú. Tratamientos efectivos para dolor, artritis, hernias discales y más. Centro Médico Stella Maris.",
+  description: "Clínica de ozonoterapia y medicina regenerativa en Huaraz. Especialistas en PRP, dolor crónico, artritis y hernias. ¡Recupera tu calidad de vida hoy!",
   keywords: [
     "ozonoterapia",
     "plasma rico en plaquetas",
