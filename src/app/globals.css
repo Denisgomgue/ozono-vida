@@ -131,10 +131,10 @@ body {
   }
 
   /* Estilos adicionales para mejorar visibilidad */
-  .services-page h1.text-white {
+  /* .services-page h1.text-white {
     color: white !important;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  }
+  } */
 
   .services-page h1.text-corporate-text-dark {
     color: var(--corporate-text-dark) !important;
