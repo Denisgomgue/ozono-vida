@@ -11,7 +11,7 @@ export function Footer() {
                     {/* Logo y Descripción */}
                     <div className="space-y-4">
                         <Logo size="md" />
-                        
+
                         <p className="text-gray-600 dark:text-gray-400 text-sm">
                             Clínica especializada en ozonoterapia y medicina regenerativa en Huaraz.
                             Tratamientos efectivos para mejorar tu calidad de vida.
@@ -76,23 +76,23 @@ export function Footer() {
                     <div>
                         <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">Contacto</h3>
                         <ul className="space-y-3 text-sm">
-                            <li className="flex items-center space-x-2">
-                                <Phone className="w-4 h-4 text-primary" />
+                            <li className="flex items-start space-x-2">
+                                <Phone className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                                 <span className="text-gray-600 dark:text-gray-400">{companyData.phone}</span>
                             </li>
-                            <li className="flex items-center space-x-2">
-                                <Mail className="w-4 h-4 text-primary" />
+                            <li className="flex items-start space-x-2">
+                                <Mail className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                                 <span className="text-gray-600 dark:text-gray-400">{companyData.email}</span>
                             </li>
                             <li className="flex items-start space-x-2">
-                                <MapPin className="w-4 h-4 text-primary" />
+                                <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                                 <span className="text-gray-600 dark:text-gray-400">
                                     {companyData.address}<br />
                                     {companyData.location}
                                 </span>
                             </li>
-                            <li className="flex items-center space-x-2">
-                                <Clock className="w-4 h-4 text-primary" />
+                            <li className="flex items-start space-x-2">
+                                <Clock className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                                 <span className="text-gray-600 dark:text-gray-400">
                                     {companyData.hours.weekdays}<br />
                                     {companyData.hours.saturday}

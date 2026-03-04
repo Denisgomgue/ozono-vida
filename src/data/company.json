@@ -1,7 +1,7 @@
 {
   "name": "Ozono Vida",
   "location": "Huaraz, Ancash, Perú",
-  "address": "Jr. Simón Bolívar Mz 158, Villón Alto",
+  "address": "AV.  Villón Alto 768 Huaraz Ref. Frente  a la puerta administrativa Hospital “Víctor Ramos Guardia",
   "phone": "+51 901 276 092",
   "whatsapp": "+51 901 276 092",
   "email": "ozonovidahuaraz@gmail.com",
@@ -27,18 +27,18 @@
         "type": "ubicacion"
       },
       {
-        "id": "7555505873548889362",
-        "title": "Plasma Rico en Plaquetas",
-        "description": "Tratamiento de plasma rico en plaquetas para regeneración celular",
-        "url": "https://www.tiktok.com/@ozono.vida.huaraz/video/7555505873548889362",
-        "type": "prp"
+        "id": "7611415877073866004",
+        "title": "Ácido Hialurónico",
+        "description": "Adios dolor de rodilla - Tratamiento con ácido hialurónico para regeneración y alivio.",
+        "url": "https://www.tiktok.com/@ozono.vida.huaraz/video/7611415877073866004",
+        "type": "articulares"
       },
       {
-        "id": "7556083121465199879",
-        "title": "Hernia Discal",
-        "description": "Tratamiento de hernia discal con ozonoterapia",
-        "url": "https://www.tiktok.com/@ozono.vida.huaraz/video/7556083121465199879",
-        "type": "hernia"
+        "id": "7608228869786701077",
+        "title": "Plasma Rico en Plaquetas",
+        "description": "Plasma rico en plaquetas en rodilla para regeneración celular y recuperación rápida.",
+        "url": "https://www.tiktok.com/@ozono.vida.huaraz/video/7608228869786701077",
+        "type": "prp"
       }
     ]
   }
