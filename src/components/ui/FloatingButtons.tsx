@@ -6,8 +6,8 @@ import { useTheme } from 'next-themes';
 import companyData from '@/data/company.json';
 
 export function FloatingButtons() {
-    const [mounted, setMounted] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
+    const [ mounted, setMounted ] = useState(false);
+    const [ isOpen, setIsOpen ] = useState(false);
     const { theme, setTheme } = useTheme();
 
     useEffect(() => {
@@ -21,14 +21,13 @@ export function FloatingButtons() {
 
     return (
         <div className="fixed bottom-6 right-6 z-50">
-            {/* Botón principal que abre el menú */}
+            {/* Botón principal que abre el menú - Solo visible en móvil */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`w-14 h-14 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 ${
-                    isOpen 
-                        ? 'bg-corporate-red text-white' 
+                className={`md:hidden w-14 h-14 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 ${isOpen
+                        ? 'bg-corporate-red text-white'
                         : 'bg-corporate-blue text-white'
-                }`}
+                    }`}
                 aria-label="Abrir menú de contacto"
             >
                 {isOpen ? (
@@ -38,10 +37,9 @@ export function FloatingButtons() {
                 )}
             </button>
 
-            {/* Botones flotantes */}
-            <div className={`absolute bottom-16 right-0 space-y-3 transition-all duration-300 ${
-                isOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4'
-            }`}>
+            {/* Botones flotantes - Siempre visibles en desktop, colapsables en móvil */}
+            <div className={`absolute bottom-16 md:bottom-0 right-0 space-y-3 transition-all duration-300 ${isOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4 md:opacity-100 md:visible md:translate-y-0'
+                }`}>
                 {/* WhatsApp */}
                 <a
                     href={whatsappUrl}
